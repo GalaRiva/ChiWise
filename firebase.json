@@ -1,0 +1,33 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "chi-wise-magic-psy",
+          "appId": "1:598848830765:android:60cd0a9adab491d19b67a4",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "chi-wise-magic-psy",
+          "appId": "1:598848830765:ios:5dc293d44cc7382c9b67a4",
+          "uploadDebugSymbols": true,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/config/firebase_options.dart": {
+          "projectId": "chi-wise-magic-psy",
+          "configurations": {
+            "android": "1:598848830765:android:60cd0a9adab491d19b67a4",
+            "ios": "1:598848830765:ios:5dc293d44cc7382c9b67a4"
+          }
+        }
+      }
+    }
+  }
+}

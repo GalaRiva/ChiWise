@@ -1,11 +1,13 @@
-import 'dart:ui';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
+import 'config/firebase_options.dart';
 import 'data/datasources/local/hive_decisions_datasource.dart';
 import 'data/datasources/local/hive_user_datasource.dart';
 import 'data/datasources/local/shared_prefs_datasource.dart';
@@ -32,14 +34,10 @@ Future<void> main() async {
     return true;
   };
 
-  // TODO(Этап 2+): инициализация Firebase.
-  // Сгенерировать lib/config/firebase_options.dart командой `flutterfire configure`
-  // и раскомментировать строку ниже. Без этого firebase_auth (Этап 1, см.
-  // lib/presentation/providers/auth_provider.dart) не может реально
-  // авторизовать пользователя — AuthNotifier предусмотрительно ловит эту
-  // ошибку и до тех пор считает пользователя неавторизованным, не роняя приложение.
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
+  // Firebase (Этап 2+) — конфигурация сгенерирована `flutterfire configure`
+  // в lib/config/firebase_options.dart (проект chi-wise-magic-psy).
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
 
   // TODO(релиз): инициализация RevenueCat (Этап 6, см.
   // lib/services/purchases_service.dart и FLUTTER_ARCHITECTURE_PLAN.md §3).
