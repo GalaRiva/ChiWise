@@ -258,7 +258,7 @@ class _LocationCard extends StatelessWidget {
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppDimens.cardRadius),
         border: progress.isCurrent
-            ? Border.all(color: AppColors.softGold.withOpacity(0.6))
+            ? Border.all(color: AppColors.softGold.withValues(alpha: 0.6))
             : null,
       ),
       child: Row(
@@ -323,7 +323,7 @@ class _LocationCard extends StatelessWidget {
                 filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
                 child: Container(
                   alignment: Alignment.center,
-                  color: AppColors.deepBlue.withOpacity(0.35),
+                  color: AppColors.deepBlue.withValues(alpha: 0.35),
                   child: const Icon(
                     Icons.lock_outline,
                     color: AppColors.textSecondary,

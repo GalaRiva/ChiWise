@@ -364,7 +364,7 @@ class _AchievementCardState extends State<_AchievementCard> {
               filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
               child: Container(
                 alignment: Alignment.center,
-                color: AppColors.deepBlue.withOpacity(0.35),
+                color: AppColors.deepBlue.withValues(alpha: 0.35),
                 child: const Icon(
                   Icons.help_outline,
                   color: AppColors.textSecondary,

@@ -96,11 +96,7 @@ class DecisionFlowState {
 /// (DecisionFlowScreen) вызывает методы этого класса, а не usecases/репозиторий
 /// напрямую — тот же стиль, что и AuthNotifier (см. auth_provider.dart).
 class DecisionFlowNotifier extends Notifier<DecisionFlowState> {
-  // ВАЖНО (неуверенность без Flutter/Dart SDK в этой среде): в uuid ^4.x
-  // конструктор `Uuid()` не гарантированно const (в отличие от uuid ^3.x) —
-  // используем `static final`, а не `static const`, чтобы не словить ошибку
-  // компиляции "not a constant expression", если это так.
-  static final Uuid _uuid = Uuid();
+  static const Uuid _uuid = Uuid();
 
   @override
   DecisionFlowState build() {

@@ -40,20 +40,13 @@ class DecisionBubbleChart extends StatelessWidget {
       // относительно самого "объёмного" решения в списке.
       final double radius = 6 + (26 - 6) * (volume / maxVolume);
       final DecisionTagOption? tagOption = DecisionTagOption.byKey(decision.tag);
-      final Color color = (tagOption?.color ?? Colors.grey).withOpacity(0.75);
+      final Color color = (tagOption?.color ?? Colors.grey).withValues(alpha: 0.75);
 
       spots.add(
         ScatterSpot(
           i.toDouble(), // X — порядковый номер решения (хронология)
           volume.toDouble(), // Y — объём текста
           dotPainter: FlDotCirclePainter(radius: radius, color: color),
-          // TODO(fl_chart 0.68.0): если `ScatterSpot` в этой версии не
-          // принимает именованный параметр `dotPainter` (а принимает,
-          // напр., `radius`/`color` напрямую в конструкторе) — заменить на
-          // актуальную сигнатуру при первой реальной сборке. По документации
-          // fl_chart для версий 0.6x `ScatterSpot(x, y, {dotPainter, ...})`
-          // — это наиболее вероятный вариант, но не проверено компиляцией
-          // в этой песочнице (нет Dart SDK/сети до pub.dev).
         ),
       );
     }

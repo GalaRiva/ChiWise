@@ -40,13 +40,6 @@ class SensorsService {
     // вызывающей стороны, т.к. на некоторых эмуляторах/платформах датчик
     // акселерометра может отсутствовать и подписка бросит исключение.
     try {
-      // TODO(sensors_plus 6.0.1): сверить точное имя API при первой реальной
-      // сборке проекта (нет доступа к Flutter/Dart SDK и pub.dev в этой
-      // песочнице, см. задание Этапа 5, п.3). Наиболее вероятный актуальный
-      // API для этой версии пакета — метод `accelerometerEventStream()`
-      // (пришёл на смену устаревшему геттеру `accelerometerEvents` из более
-      // ранних версий sensors_plus). Если сигнатура/имя иные — заменить
-      // строку ниже.
       _subscription = accelerometerEventStream().listen(
         _onEvent,
         onError: (Object _, StackTrace __) {

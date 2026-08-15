@@ -12,12 +12,6 @@ class AnalyticsService {
 
   Future<void> logDecisionCompleted({required int decisionsCount}) async {
     try {
-      // TODO(firebase_analytics 11.2.1): сверить сигнатуру logEvent — нет
-      // доступа к Flutter/Dart SDK и pub.dev в этой песочнице, чтобы
-      // скомпилировать и проверить. Ожидается
-      // `Future<void> logEvent({required String name, Map<String, Object?>? parameters})`;
-      // по правилам вывода типов Dart литерал ниже должен сам привестись к
-      // `Map<String, Object?>` из контекста параметра.
       await FirebaseAnalytics.instance.logEvent(
         name: 'decision_completed',
         parameters: {'decisions_count': decisionsCount},

@@ -282,7 +282,7 @@ class _DoubtQuoteCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppDimens.cardRadius),
-        border: Border.all(color: AppColors.softGold.withOpacity(0.3)),
+        border: Border.all(color: AppColors.softGold.withValues(alpha: 0.3)),
       ),
       child: Text(
         '«$doubtText»',
@@ -324,7 +324,7 @@ class _TagChip extends StatelessWidget {
         color: selected ? AppColors.deepBlue : option.color,
         fontWeight: FontWeight.w600,
       ),
-      side: BorderSide(color: option.color.withOpacity(0.5)),
+      side: BorderSide(color: option.color.withValues(alpha: 0.5)),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppDimens.buttonRadius),
       ),

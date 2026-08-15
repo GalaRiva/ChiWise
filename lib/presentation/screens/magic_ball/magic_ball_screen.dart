@@ -212,7 +212,7 @@ class _MagicBallVisual extends StatelessWidget {
                 blurRadius: AppDimens.neumorphicBlur,
               ),
               BoxShadow(
-                color: AppColors.softGold.withOpacity(0.25 + shakeIntensity * 0.25),
+                color: AppColors.softGold.withValues(alpha: 0.25 + shakeIntensity * 0.25),
                 blurRadius: glow,
                 spreadRadius: isAsking ? 4 : 0,
               ),
@@ -222,7 +222,7 @@ class _MagicBallVisual extends StatelessWidget {
           child: Icon(
             Icons.blur_circular,
             size: 64,
-            color: AppColors.turquoise.withOpacity(0.8),
+            color: AppColors.turquoise.withValues(alpha: 0.8),
           ),
         ),
       ),
@@ -252,7 +252,7 @@ class _BlockCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppDimens.cardRadius),
-        border: Border.all(color: AppColors.softGold.withOpacity(0.3)),
+        border: Border.all(color: AppColors.softGold.withValues(alpha: 0.3)),
       ),
       child: Column(
         children: [

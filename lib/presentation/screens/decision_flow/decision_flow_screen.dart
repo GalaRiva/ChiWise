@@ -301,7 +301,7 @@ class _DoubtQuoteCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppDimens.cardRadius),
-        border: Border.all(color: AppColors.softGold.withOpacity(0.3)),
+        border: Border.all(color: AppColors.softGold.withValues(alpha: 0.3)),
       ),
       child: Text(
         '«$doubtText»',

@@ -24,12 +24,6 @@ class ReviewService {
   /// / App Store SKStoreReviewController). Показывается системой не всегда
   /// (лимиты частоты показов на стороне ОС/стора — вне нашего контроля,
   /// см. `isAvailable()` ниже) — это ОЖИДАЕМОЕ поведение платформы, не баг.
-  ///
-  /// TODO(in_app_review 2.0.9): сверить точные имена статического
-  /// синглтона/методов при первой реальной сборке (нет доступа к
-  /// Flutter/Dart SDK и pub.dev в этой песочнице). Наиболее вероятный
-  /// актуальный API — `InAppReview.instance.isAvailable()` и
-  /// `InAppReview.instance.requestReview()`.
   Future<void> requestNativeReview() async {
     try {
       final InAppReview inAppReview = InAppReview.instance;
@@ -46,12 +40,6 @@ class ReviewService {
   /// телом [body], адресат — [kSupportEmail] (см.
   /// presentation/providers/rating_flow_provider.dart — константа лежит там,
   /// а не дублируется здесь, чтобы не разойтись при будущих правках ТЗ).
-  ///
-  /// TODO(url_launcher 6.3.0): сверить точную сигнатуру `Uri(...)` /
-  /// `canLaunchUrl` / `launchUrl` при первой реальной сборке (нет доступа к
-  /// Flutter/Dart SDK и pub.dev в этой песочнице). Используется
-  /// стандартный для этой версии пакета путь: `Uri(scheme: 'mailto', ...)` +
-  /// `canLaunchUrl(uri)` перед `launchUrl(uri)`.
   Future<void> openSupportEmail({
     required String subject,
     required String body,

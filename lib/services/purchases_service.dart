@@ -22,11 +22,6 @@ class PurchasesService {
   /// Инициализация RevenueCat SDK. В этой среде разработки не вызывается из
   /// main.dart (нет реального API-ключа) — метод существует готовым к
   /// использованию на релизе (см. TODO-блок в main.dart).
-  ///
-  /// TODO(purchases_flutter 7.27.1): сверить точное имя API при первой
-  /// реальной сборке проекта (нет доступа к Flutter/Dart SDK и pub.dev в
-  /// этой песочнице). Наиболее вероятный актуальный способ конфигурации —
-  /// `PurchasesConfiguration(apiKey)` + `Purchases.configure(...)`.
   Future<void> configure(String apiKey) async {
     try {
       await Purchases.configure(PurchasesConfiguration(apiKey));
@@ -55,17 +50,15 @@ class PurchasesService {
   /// (paywall_provider.dart) оба случая означают одно и то же: "подписка не
   /// оформлена", отдельного сообщения про отмену пользователю не показываем.
   ///
-  /// TODO(purchases_flutter 7.27.1): сверить сигнатуру при первой реальной
-  /// сборке — здесь используется самый распространённый в документации
-  /// RevenueCat вызов `Purchases.purchasePackage(package)` (возвращает
-  /// `CustomerInfo` напрямую, без обёртки `{productIdentifier, customerInfo}`,
-  /// как было в более старых версиях SDK, и без билдера `PurchaseParams`,
-  /// который в некоторых минорных версиях 7.x используется для
-  /// iOS-специфичных опций, напр. `Purchases.purchase(PurchaseParams.builder(package).build())`).
-  /// Если в 7.27.1 актуален именно билдер — заменить вызов ниже.
+  /// В purchases_flutter 9+ `Purchases.purchasePackage()` возвращает
+  /// `PurchaseResult` (обёртка над `{customerInfo, storeTransaction}`), а не
+  /// `CustomerInfo` напрямую, как в более старых версиях SDK — отсюда
+  /// `.customerInfo` ниже.
   Future<CustomerInfo?> purchasePackage(Package package) async {
     try {
-      return await Purchases.purchasePackage(package);
+      final PurchaseResult result =
+          await Purchases.purchase(PurchaseParams.package(package));
+      return result.customerInfo;
     } on PlatformException catch (e) {
       final PurchasesErrorCode errorCode = PurchasesErrorHelper.getErrorCode(e);
       if (errorCode == PurchasesErrorCode.purchaseCancelledError) {
