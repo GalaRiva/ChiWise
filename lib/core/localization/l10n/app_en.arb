@@ -1,0 +1,195 @@
+{
+  "@@locale": "en",
+  "appTitle": "Chi Wise Magic",
+  "onboardingSkip": "Skip",
+  "onboardingNext": "Next",
+  "onboardingTitle1": "We often face difficult decisions",
+  "onboardingTitle2": "Sometimes fear holds us back! Emotions cloud the mind!",
+  "onboardingTitle3": "Sometimes an important decision must be made quickly, but it's hard to do",
+  "onboardingTitle4": "Make conscious decisions you'll never feel guilty or regretful about",
+  "authContinueWithApple": "Continue with Apple",
+  "authContinueWithGoogle": "Continue with Google",
+  "authContinueAnonymously": "Continue without an account",
+  "decisionDoubtPrompt": "If you don't know what to do... write down your doubt",
+  "decisionQuestion1": "What will happen if it does?",
+  "decisionQuestion2": "What will happen if it doesn't?",
+  "decisionQuestion3": "What won't happen if it does?",
+  "decisionQuestion4": "What won't happen if it doesn't?",
+  "decisionNext": "Next",
+  "decisionBack": "Back",
+  "decisionCancel": "Cancel",
+  "decisionAccept": "Decision made",
+  "decisionCancelConfirmTitle": "Cancel this entry?",
+  "decisionCancelConfirmMessage": "The draft will be deleted and can't be recovered.",
+  "decisionCancelConfirmYes": "Yes, cancel",
+  "decisionCancelConfirmNo": "Keep going",
+  "decisionSummaryTitle": "Your Decision",
+  "decisionSummarySubtitle": "Review your answers and decide with clarity",
+  "decisionDetailSave": "Save",
+  "decisionDetailSaved": "Changes saved",
+  "decisionDetailNotFound": "Entry not found",
+  "magicBallAsk": "Ask the ball",
+  "magicBallReturn": "Return",
+  "magicBallWarning": "Please be respectful to the Magic Ball and phrase your questions clearly. Focus on your question. Be sincere.",
+  "magicBallShakeHint": "Tap the ball or shake your phone",
+  "magicBallLimitReachedMessage": "You've used all your free questions to the Ball. Get unlimited access to keep asking.",
+  "magicBallGoToPaywall": "Get unlimited access",
+  "magicBallLowEnergyMessage": "The Ball is tired and can't answer. Make a mindful decision on the map to recharge its energy.",
+  "magicBallGoToDecision": "Make a decision",
+  "paywallTitle": "Get the Magic Ball!",
+  "paywallSubtitle": "Ask unlimited questions and get instant answers.",
+  "paywallMonthly": "Monthly",
+  "paywallYearly": "Yearly",
+  "paywallLifetime": "Lifetime",
+  "paywallYearlySavings": "Save {amount}!",
+  "@paywallYearlySavings": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "paywallContinue": "Continue",
+  "paywallRestoreButton": "Restore purchases",
+  "paywallRestoreFailed": "No active purchases were found to restore.",
+  "paywallPurchaseUnavailable": "Purchases aren't available yet — the store isn't set up.",
+  "settingsLanguage": "Language",
+  "settingsSubscription": "Subscription",
+  "ratingTitle": "How was your experience?",
+  "ratingLowStarsThanks": "Thanks for the feedback — tell us more so we can improve",
+  "ratingHighStarsThanks": "Thank you! Would you rate us on the store?",
+  "ratingSubmit": "Submit",
+  "ratingSkip": "Not now",
+  "ratingDone": "Done",
+  "ratingEmailSubject": "Feedback about Chi Wise Magic",
+  "ratingEmailBody": "Tell us what we could improve:",
+  "achOrbitalStabilityTitle": "Orbital Stability",
+  "achOrbitalStabilityDesc": "Make at least one decision every day for 7 days in a row.",
+  "achNightOwlSageTitle": "Night Owl Sage",
+  "achNightOwlSageDesc": "Complete the Square and make a decision after 11pm.",
+  "achBalanceMasterTitle": "Balance Master",
+  "achBalanceMasterDesc": "Write an equal number of arguments in all four blocks.",
+  "achDeepAnalysisTitle": "Deep Analysis",
+  "achDeepAnalysisDesc": "Write more than 5 detailed points in each block of one doubt.",
+  "achIllusionBreakerTitle": "Illusion Breaker",
+  "achIllusionBreakerDesc": "The hardest block — \"what won't happen if it doesn't\" — turns out to be the most detailed.",
+  "achEclipseCatcherTitle": "Eclipse Catcher",
+  "achEclipseCatcherDesc": "Resolve a doubt that sat as a draft longer than any other (7+ days).",
+  "achPlanetParadeTitle": "Planet Parade",
+  "achPlanetParadeDesc": "Make 6 decisions in a row within the same category.",
+  "achLightMindTitle": "Clear Mind",
+  "achLightMindDesc": "Move from an earthly location (Mountain/Island) to a cosmic one (Star Peak).",
+  "achMagicResonanceTitle": "Magic Resonance",
+  "achMagicResonanceDesc": "Fully recharge the Ball's energy without asking it a single question.",
+  "achFateTesterTitle": "Fate Tester",
+  "achFateTesterDesc": "Ask the Ball 3 different questions in one day.",
+  "achEclipseObserverTitle": "Eclipse Observer",
+  "achEclipseObserverRiddle": "Sometimes you must climb to see how the shadow briefly covers the light. Find your peak.",
+  "achEclipseObserverDesc": "Left a doubt as a draft for several days, then returned and made a clear decision.",
+  "achEclipseObserverQuote": "Even the sun returns after its shadow passes.",
+  "achPerfectAlignmentTitle": "Perfect Alignment",
+  "achPerfectAlignmentRiddle": "A rare event, when six spheres line up as one. Bring your thoughts into the same order.",
+  "achPerfectAlignmentDesc": "6 decisions in a row with the same tag, without asking the Magic Ball once.",
+  "achPerfectAlignmentQuote": "Clarity is a line, not a scatter.",
+  "achOrhekiaHeightTitle": "Height of Orhekia",
+  "achOrhekiaHeightRiddle": "The higher the viewpoint, the clearer the horizon. Clear away every obstacle in your path.",
+  "achOrhekiaHeightDesc": "Filled all four blocks of the Square without a single backspace/delete.",
+  "achOrhekiaHeightQuote": "One breath, one thought, one truth.",
+  "achOracleWhisperTitle": "Whisper of the Oracle",
+  "achOracleWhisperRiddle": "The Ball knows the answer, but sometimes needs time to think. Shake it, but don't rush it.",
+  "achOracleWhisperDesc": "Held the Ball shaking for 15+ seconds on the Magic Ball screen without pressing \"Ask\".",
+  "achOracleWhisperQuote": "Patience is a question asked without words.",
+  "locationRiverField": "River and Field",
+  "locationMountain": "Mountain",
+  "locationStarPeak": "Star Peak",
+  "locationIsland": "Island",
+  "locationOceanBoat": "Ocean by Boat",
+  "locationOracleValley": "Oracle Valley",
+  "locationEclipseGate": "Eclipse Gate",
+  "locationSixPlanetsPath": "Path of Six Planets",
+  "locationSolarSystem": "Solar System",
+  "locationConstellations": "Constellations",
+  "locationMilkyWay": "Milky Way Galaxy",
+  "locationLargestGalaxy": "The Largest Known Galaxy",
+  "locationUniverse": "Image of the Universe",
+  "locationHumanBrain": "Human Brain",
+  "locationHomeOutside": "Home (Outside)",
+  "locationHomeInsideFinal": "Home (Inside)",
+  "homeMapDecisionsCount": "Decisions made: {count}",
+  "@homeMapDecisionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMapStreak": "Day streak: {count}",
+  "@homeMapStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMapStartDecision": "Make a decision",
+  "homeMapLocationLocked": "This location is still locked",
+  "homeMapDecisionsHereTitle": "Decisions here",
+  "homeMapNoDecisionsHere": "No decisions here yet",
+  "achievementsScreenTitle": "Achievements",
+  "achievementsCategoryBehavioral": "Behavioral",
+  "achievementsCategoryAnalytical": "Analytical",
+  "achievementsCategoryNarrativeAstro": "Story & Cosmos",
+  "achievementsCategoryMagicBall": "Magic Ball",
+  "mindfulnessScreenTitle": "Mindfulness Scale",
+  "mindfulnessLevelSeeker": "Seeker",
+  "mindfulnessLevelObserver": "Observer",
+  "mindfulnessLevelRationalist": "Rationalist",
+  "mindfulnessLevelBalanceMaster": "Balance Master",
+  "mindfulnessLevelGuardianOfClarity": "Guardian of Clarity",
+  "mindfulnessScoreLabel": "{score} mindfulness points",
+  "@mindfulnessScoreLabel": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "mindfulnessProgressToNext": "To the next level: {percent}%",
+  "@mindfulnessProgressToNext": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "mindfulnessMaxLevelReached": "You've reached the peak of mindfulness",
+  "mindfulnessLevelUpMessage": "New level: {level}!",
+  "@mindfulnessLevelUpMessage": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "decisionTagWork": "Work",
+  "decisionTagRelationships": "Relationships",
+  "decisionTagHealth": "Health",
+  "decisionTagFinances": "Finances",
+  "decisionTagPersonalGrowth": "Personal Growth",
+  "decisionTagOther": "Other",
+  "decisionTagPickerLabel": "Category (optional)",
+  "statsScreenTitle": "My Decisions",
+  "statsEmptyState": "No completed decisions yet — make your first one to see your stats",
+  "settingsScreenTitle": "Settings",
+  "settingsSubscriptionNone": "No active subscription",
+  "settingsSubscriptionExpiresOn": "Active until {date}",
+  "@settingsSubscriptionExpiresOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsUpgradeButton": "Get Premium",
+  "settingsLanguageSystemDefault": "System default"
+}

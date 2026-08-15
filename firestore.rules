@@ -1,0 +1,31 @@
+rules_version = '2';
+
+// Chi Wise Magic — правила безопасности Firestore.
+// См. FLUTTER_ARCHITECTURE_PLAN.md §2.1 (UserModel, `users/{uid}`) и §2.2
+// (DecisionModel, `users/{uid}/decisions/{decisionId}`).
+//
+// Это ЗАГОТОВКА для будущего деплоя (`firebase deploy --only firestore:rules`
+// либо вставить содержимое в Firebase Console -> Firestore -> Rules) —
+// на Этапе 3 никуда не подключается, т.к. `flutterfire configure` ещё не
+// выполнялся и проект Firebase не создан (см. main.dart, auth_provider.dart).
+//
+// Принцип: пользователь может читать и писать ТОЛЬКО свой собственный
+// документ `users/{uid}` и вложенную коллекцию `users/{uid}/decisions/*`.
+// Никакого доступа к чужим данным, никакого публичного чтения/записи.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      match /decisions/{decisionId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // Всё остальное — запрещено по умолчанию.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

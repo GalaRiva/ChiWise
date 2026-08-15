@@ -1,0 +1,195 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Chi Wise Magic",
+  "onboardingSkip": "Пропустить",
+  "onboardingNext": "Далее",
+  "onboardingTitle1": "Часто сталкиваемся со сложными решениями",
+  "onboardingTitle2": "Иногда страхи останавливают! Эмоции застилают разум!",
+  "onboardingTitle3": "Иногда важное решение надо принять быстро, но сделать это сложно",
+  "onboardingTitle4": "Принимай осознанные решения, за которые не будешь чувствовать вину и сожаления",
+  "authContinueWithApple": "Войти через Apple",
+  "authContinueWithGoogle": "Войти через Google",
+  "authContinueAnonymously": "Продолжить без регистрации",
+  "decisionDoubtPrompt": "Если не знаешь, как поступить... напишите своё сомнение",
+  "decisionQuestion1": "Что будет, если это произойдёт?",
+  "decisionQuestion2": "Что будет, если это НЕ произойдёт?",
+  "decisionQuestion3": "Чего НЕ будет, если это произойдёт?",
+  "decisionQuestion4": "Чего НЕ будет, если это НЕ произойдёт?",
+  "decisionNext": "Далее",
+  "decisionBack": "Назад",
+  "decisionCancel": "Отменить",
+  "decisionAccept": "Решение принято",
+  "decisionCancelConfirmTitle": "Отменить заполнение?",
+  "decisionCancelConfirmMessage": "Черновик сомнения будет удалён без возможности восстановления.",
+  "decisionCancelConfirmYes": "Да, отменить",
+  "decisionCancelConfirmNo": "Продолжить",
+  "decisionSummaryTitle": "Твоё решение",
+  "decisionSummarySubtitle": "Просмотри свои ответы и прими решение осознанно",
+  "decisionDetailSave": "Сохранить",
+  "decisionDetailSaved": "Изменения сохранены",
+  "decisionDetailNotFound": "Запись не найдена",
+  "magicBallAsk": "Спросить шар",
+  "magicBallReturn": "Вернуться",
+  "magicBallWarning": "Проявляйте уважение к Магическому шару и ясно формулируйте свои вопросы. Сконцентрируйтесь на вопросе. Будьте искренним.",
+  "magicBallShakeHint": "Нажми на шар или тряхни телефон",
+  "magicBallLimitReachedMessage": "Бесплатные вопросы Шару закончились. Оформи подписку, чтобы спрашивать без ограничений.",
+  "magicBallGoToPaywall": "Получить безлимитный доступ",
+  "magicBallLowEnergyMessage": "Шар устал и не может ответить. Прими осознанное решение на карте локаций, чтобы зарядить его энергию.",
+  "magicBallGoToDecision": "Принять решение",
+  "paywallTitle": "Получить Магический Шар!",
+  "paywallSubtitle": "Задавай неограниченное количество вопросов и получай немедленный ответ.",
+  "paywallMonthly": "Месяц",
+  "paywallYearly": "Год",
+  "paywallLifetime": "Навсегда",
+  "paywallYearlySavings": "Сэкономишь {amount}!",
+  "@paywallYearlySavings": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "paywallContinue": "Продолжить",
+  "paywallRestoreButton": "Восстановить покупки",
+  "paywallRestoreFailed": "Не удалось найти активные покупки для восстановления.",
+  "paywallPurchaseUnavailable": "Покупки пока недоступны — магазин ещё не настроен.",
+  "settingsLanguage": "Язык",
+  "settingsSubscription": "Подписка",
+  "ratingTitle": "Как вам приложение?",
+  "ratingLowStarsThanks": "Спасибо за отзыв — расскажите подробнее, чтобы мы стали лучше",
+  "ratingHighStarsThanks": "Спасибо! Оцените нас в сторе?",
+  "ratingSubmit": "Отправить",
+  "ratingSkip": "Позже",
+  "ratingDone": "Готово",
+  "ratingEmailSubject": "Отзыв о Chi Wise Magic",
+  "ratingEmailBody": "Расскажите, что можно улучшить:",
+  "achOrbitalStabilityTitle": "Орбитальная стабильность",
+  "achOrbitalStabilityDesc": "Принимать хотя бы одно решение 7 дней подряд.",
+  "achNightOwlSageTitle": "Сова-мудрец",
+  "achNightOwlSageDesc": "Заполнить квадрат и принять решение после 23:00.",
+  "achBalanceMasterTitle": "Мастер баланса",
+  "achBalanceMasterDesc": "Написать равное количество аргументов во всех четырёх квадратах.",
+  "achDeepAnalysisTitle": "Глубокий анализ",
+  "achDeepAnalysisDesc": "Заполнить более 5 развёрнутых пунктов в каждом из блоков одного сомнения.",
+  "achIllusionBreakerTitle": "Разрушитель иллюзий",
+  "achIllusionBreakerDesc": "Блок «Чего НЕ будет, если это НЕ произойдёт» оказался самым заполненным.",
+  "achEclipseCatcherTitle": "Ловец затмений",
+  "achEclipseCatcherDesc": "Решение проблемы, которая «висела» в черновиках дольше всего (7+ дней).",
+  "achPlanetParadeTitle": "Парад планет",
+  "achPlanetParadeDesc": "6 решений подряд в одной и той же категории.",
+  "achLightMindTitle": "Светлый разум",
+  "achLightMindDesc": "Переход с земных локаций (Гора/Остров) на космические (Звёздный пик).",
+  "achMagicResonanceTitle": "Магический резонанс",
+  "achMagicResonanceDesc": "Полностью зарядить энергию Шара, ни разу не обратившись к нему за подсказкой.",
+  "achFateTesterTitle": "Испытатель судьбы",
+  "achFateTesterDesc": "Использовать Шар 3 раза за один день для разных вопросов.",
+  "achEclipseObserverTitle": "Наблюдатель Затмения",
+  "achEclipseObserverRiddle": "Иногда нужно подняться на возвышенность, чтобы увидеть, как тень ненадолго закрывает свет. Найди свой пик.",
+  "achEclipseObserverDesc": "Сомнение оставалось черновиком несколько дней, а затем было принято чёткое решение.",
+  "achEclipseObserverQuote": "Даже солнце возвращается, когда тень проходит.",
+  "achPerfectAlignmentTitle": "Идеальное Выравнивание",
+  "achPerfectAlignmentRiddle": "Редчайшее событие, когда шесть сфер выстраиваются в одну линию. Приведи мысли в такой же порядок.",
+  "achPerfectAlignmentDesc": "6 решений подряд в одной категории без единого обращения к Магическому Шару.",
+  "achPerfectAlignmentQuote": "Ясность — это линия, а не разброс.",
+  "achOrhekiaHeightTitle": "Высота Орхехии",
+  "achOrhekiaHeightRiddle": "Чем выше точка обзора, тем яснее горизонт. Избавься от всех помех на своём пути.",
+  "achOrhekiaHeightDesc": "Заполнены все четыре блока Квадрата Декарта без единого backspace.",
+  "achOrhekiaHeightQuote": "Один вдох, одна мысль, одна правда.",
+  "achOracleWhisperTitle": "Шёпот Оракула",
+  "achOracleWhisperRiddle": "Шар знает ответ, но иногда ему нужно время на раздумья. Потряси, но не торопи.",
+  "achOracleWhisperDesc": "Тряска Шара на экране удерживалась 15+ секунд без нажатия «Спросить».",
+  "achOracleWhisperQuote": "Терпение — это вопрос, заданный без слов.",
+  "locationRiverField": "Река и поле",
+  "locationMountain": "Гора",
+  "locationStarPeak": "Звёздный пик",
+  "locationIsland": "Остров",
+  "locationOceanBoat": "Океан на лодке",
+  "locationOracleValley": "Долина Оракула",
+  "locationEclipseGate": "Врата Затмения",
+  "locationSixPlanetsPath": "Тропа Шести Планет",
+  "locationSolarSystem": "Солнечная система",
+  "locationConstellations": "Созвездия",
+  "locationMilkyWay": "Галактика Млечный Путь",
+  "locationLargestGalaxy": "Самая большая известная галактика",
+  "locationUniverse": "Изображение вселенной",
+  "locationHumanBrain": "Мозг человека",
+  "locationHomeOutside": "Дом (Снаружи)",
+  "locationHomeInsideFinal": "Дом (Внутри)",
+  "homeMapDecisionsCount": "Решений принято: {count}",
+  "@homeMapDecisionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMapStreak": "Серия дней: {count}",
+  "@homeMapStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMapStartDecision": "Принять решение",
+  "homeMapLocationLocked": "Эта локация ещё закрыта",
+  "homeMapDecisionsHereTitle": "Решения здесь",
+  "homeMapNoDecisionsHere": "Пока нет решений на этой локации",
+  "achievementsScreenTitle": "Достижения",
+  "achievementsCategoryBehavioral": "Поведенческие",
+  "achievementsCategoryAnalytical": "Аналитические",
+  "achievementsCategoryNarrativeAstro": "Сюжетные",
+  "achievementsCategoryMagicBall": "Магический Шар",
+  "mindfulnessScreenTitle": "Шкала осознанности",
+  "mindfulnessLevelSeeker": "Искатель",
+  "mindfulnessLevelObserver": "Наблюдатель",
+  "mindfulnessLevelRationalist": "Рационализатор",
+  "mindfulnessLevelBalanceMaster": "Мастер Баланса",
+  "mindfulnessLevelGuardianOfClarity": "Хранитель Ясности",
+  "mindfulnessScoreLabel": "{score} очков осознанности",
+  "@mindfulnessScoreLabel": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "mindfulnessProgressToNext": "До следующего уровня: {percent}%",
+  "@mindfulnessProgressToNext": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "mindfulnessMaxLevelReached": "Ты достиг вершины осознанности",
+  "mindfulnessLevelUpMessage": "Новый уровень: {level}!",
+  "@mindfulnessLevelUpMessage": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "decisionTagWork": "Работа",
+  "decisionTagRelationships": "Отношения",
+  "decisionTagHealth": "Здоровье",
+  "decisionTagFinances": "Финансы",
+  "decisionTagPersonalGrowth": "Личностный рост",
+  "decisionTagOther": "Другое",
+  "decisionTagPickerLabel": "Категория (необязательно)",
+  "statsScreenTitle": "Мои решения",
+  "statsEmptyState": "Пока нет завершённых решений — прими своё первое, чтобы увидеть статистику",
+  "settingsScreenTitle": "Настройки",
+  "settingsSubscriptionNone": "Без подписки",
+  "settingsSubscriptionExpiresOn": "Действует до {date}",
+  "@settingsSubscriptionExpiresOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsUpgradeButton": "Оформить подписку",
+  "settingsLanguageSystemDefault": "Как в системе"
+}

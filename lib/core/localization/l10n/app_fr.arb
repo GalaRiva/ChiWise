@@ -1,0 +1,195 @@
+{
+  "@@locale": "fr",
+  "appTitle": "Chi Wise Magic",
+  "onboardingSkip": "Passer",
+  "onboardingNext": "Suivant",
+  "onboardingTitle1": "Nous sommes souvent confrontés à des décisions difficiles",
+  "onboardingTitle2": "Parfois, la peur nous arrête ! Les émotions brouillent l'esprit !",
+  "onboardingTitle3": "Parfois, une décision importante doit être prise rapidement, mais c'est difficile",
+  "onboardingTitle4": "Prends des décisions conscientes dont tu ne ressentiras jamais ni culpabilité ni regret",
+  "authContinueWithApple": "Continuer avec Apple",
+  "authContinueWithGoogle": "Continuer avec Google",
+  "authContinueAnonymously": "Continuer sans compte",
+  "decisionDoubtPrompt": "Si vous ne savez pas quoi faire... écrivez votre doute",
+  "decisionQuestion1": "Que se passera-t-il si cela arrive ?",
+  "decisionQuestion2": "Que se passera-t-il si cela n'arrive pas ?",
+  "decisionQuestion3": "Que ne se passera-t-il PAS si cela arrive ?",
+  "decisionQuestion4": "Que ne se passera-t-il PAS si cela n'arrive pas ?",
+  "decisionNext": "Suivant",
+  "decisionBack": "Retour",
+  "decisionCancel": "Annuler",
+  "decisionAccept": "Décision prise",
+  "decisionCancelConfirmTitle": "Annuler cette saisie ?",
+  "decisionCancelConfirmMessage": "Le brouillon sera supprimé et ne pourra pas être récupéré.",
+  "decisionCancelConfirmYes": "Oui, annuler",
+  "decisionCancelConfirmNo": "Continuer",
+  "decisionSummaryTitle": "Ta décision",
+  "decisionSummarySubtitle": "Relis tes réponses et décide en toute clarté",
+  "decisionDetailSave": "Enregistrer",
+  "decisionDetailSaved": "Modifications enregistrées",
+  "decisionDetailNotFound": "Entrée introuvable",
+  "magicBallAsk": "Interroger la boule",
+  "magicBallReturn": "Retour",
+  "magicBallWarning": "Faites preuve de respect envers la Boule Magique et formulez vos questions clairement. Concentrez-vous sur votre question. Soyez sincère.",
+  "magicBallShakeHint": "Touchez la boule ou secouez votre téléphone",
+  "magicBallLimitReachedMessage": "Vous avez utilisé toutes vos questions gratuites à la Boule. Obtenez un accès illimité pour continuer.",
+  "magicBallGoToPaywall": "Obtenir un accès illimité",
+  "magicBallLowEnergyMessage": "La Boule est fatiguée et ne peut pas répondre. Prenez une décision consciente sur la carte pour recharger son énergie.",
+  "magicBallGoToDecision": "Prendre une décision",
+  "paywallTitle": "Obtenez la Boule Magique !",
+  "paywallSubtitle": "Posez des questions illimitées et obtenez une réponse immédiate.",
+  "paywallMonthly": "Mensuel",
+  "paywallYearly": "Annuel",
+  "paywallLifetime": "À vie",
+  "paywallYearlySavings": "Économisez {amount} !",
+  "@paywallYearlySavings": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "paywallContinue": "Continuer",
+  "paywallRestoreButton": "Restaurer les achats",
+  "paywallRestoreFailed": "Aucun achat actif trouvé à restaurer.",
+  "paywallPurchaseUnavailable": "Les achats ne sont pas encore disponibles : la boutique n'est pas configurée.",
+  "settingsLanguage": "Langue",
+  "settingsSubscription": "Abonnement",
+  "ratingTitle": "Comment était votre expérience ?",
+  "ratingLowStarsThanks": "Merci pour votre retour — dites-nous en plus pour nous améliorer",
+  "ratingHighStarsThanks": "Merci ! Voulez-vous nous noter sur le store ?",
+  "ratingSubmit": "Envoyer",
+  "ratingSkip": "Plus tard",
+  "ratingDone": "Terminé",
+  "ratingEmailSubject": "Avis sur Chi Wise Magic",
+  "ratingEmailBody": "Dites-nous ce que nous pourrions améliorer :",
+  "locationRiverField": "Rivière et champ",
+  "locationMountain": "Montagne",
+  "locationStarPeak": "Pic Étoilé",
+  "locationIsland": "Île",
+  "locationOceanBoat": "Océan en barque",
+  "locationOracleValley": "Vallée de l'Oracle",
+  "locationEclipseGate": "Portail de l'Éclipse",
+  "locationSixPlanetsPath": "Sentier des Six Planètes",
+  "locationSolarSystem": "Système Solaire",
+  "locationConstellations": "Constellations",
+  "locationMilkyWay": "Galaxie Voie Lactée",
+  "locationLargestGalaxy": "La plus grande galaxie connue",
+  "locationUniverse": "Image de l'univers",
+  "locationHumanBrain": "Cerveau humain",
+  "locationHomeOutside": "Maison (Dehors)",
+  "locationHomeInsideFinal": "Maison (Dedans)",
+  "homeMapDecisionsCount": "Décisions prises : {count}",
+  "@homeMapDecisionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMapStreak": "Série de jours : {count}",
+  "@homeMapStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMapStartDecision": "Prendre une décision",
+  "homeMapLocationLocked": "Ce lieu est encore verrouillé",
+  "homeMapDecisionsHereTitle": "Décisions ici",
+  "homeMapNoDecisionsHere": "Aucune décision ici pour l'instant",
+  "achievementsScreenTitle": "Succès",
+  "achievementsCategoryBehavioral": "Comportementaux",
+  "achievementsCategoryAnalytical": "Analytiques",
+  "achievementsCategoryNarrativeAstro": "Narratifs",
+  "achievementsCategoryMagicBall": "Boule Magique",
+  "achOrbitalStabilityTitle": "Stabilité Orbitale",
+  "achOrbitalStabilityDesc": "Prends au moins une décision chaque jour pendant 7 jours d'affilée.",
+  "achNightOwlSageTitle": "Sage Oiseau de Nuit",
+  "achNightOwlSageDesc": "Remplis le Carré et prends une décision après 23h.",
+  "achBalanceMasterTitle": "Maître de l'Équilibre",
+  "achBalanceMasterDesc": "Écris le même nombre d'arguments dans les quatre blocs.",
+  "achDeepAnalysisTitle": "Analyse Approfondie",
+  "achDeepAnalysisDesc": "Écris plus de 5 points détaillés dans chaque bloc d'un même doute.",
+  "achIllusionBreakerTitle": "Briseur d'Illusions",
+  "achIllusionBreakerDesc": "Le bloc le plus difficile — « ce qui n'arrivera pas si cela n'arrive pas » — s'avère être le plus détaillé.",
+  "achEclipseCatcherTitle": "Chasseur d'Éclipses",
+  "achEclipseCatcherDesc": "Résous un doute resté en brouillon plus longtemps que tout autre (7+ jours).",
+  "achPlanetParadeTitle": "Parade des Planètes",
+  "achPlanetParadeDesc": "Prends 6 décisions d'affilée dans la même catégorie.",
+  "achLightMindTitle": "Esprit Léger",
+  "achLightMindDesc": "Passe d'un lieu terrestre (Montagne/Île) à un lieu cosmique (Pic Stellaire).",
+  "achMagicResonanceTitle": "Résonance Magique",
+  "achMagicResonanceDesc": "Recharge complètement l'énergie de la Boule sans lui poser une seule question.",
+  "achFateTesterTitle": "Testeur du Destin",
+  "achFateTesterDesc": "Interroge la Boule 3 fois dans la même journée.",
+  "achEclipseObserverTitle": "Observateur de l'Éclipse",
+  "achEclipseObserverRiddle": "Parfois il faut monter pour voir l'ombre couvrir un instant la lumière. Trouve ton sommet.",
+  "achEclipseObserverDesc": "Tu as laissé un doute en brouillon plusieurs jours, puis tu es revenu prendre une décision claire.",
+  "achEclipseObserverQuote": "Même le soleil revient quand l'ombre passe.",
+  "achPerfectAlignmentTitle": "Alignement Parfait",
+  "achPerfectAlignmentRiddle": "Un événement rarissime, où six sphères s'alignent en une seule ligne. Mets tes pensées dans le même ordre.",
+  "achPerfectAlignmentDesc": "6 décisions d'affilée dans la même catégorie, sans jamais interroger la Boule Magique.",
+  "achPerfectAlignmentQuote": "La clarté est une ligne, pas une dispersion.",
+  "achOrhekiaHeightTitle": "Hauteur d'Orhekia",
+  "achOrhekiaHeightRiddle": "Plus le point de vue est haut, plus l'horizon est clair. Écarte tous les obstacles sur ton chemin.",
+  "achOrhekiaHeightDesc": "Tu as rempli les quatre blocs du Carré sans jamais utiliser la touche retour arrière.",
+  "achOrhekiaHeightQuote": "Un souffle, une pensée, une vérité.",
+  "achOracleWhisperTitle": "Murmure de l'Oracle",
+  "achOracleWhisperRiddle": "La Boule connaît la réponse, mais parfois elle a besoin de temps pour réfléchir. Secoue-la, mais sans précipitation.",
+  "achOracleWhisperDesc": "Tu as maintenu la Boule secouée 15+ secondes à l'écran sans appuyer sur « Demander ».",
+  "achOracleWhisperQuote": "La patience est une question posée sans mots.",
+  "mindfulnessScreenTitle": "Échelle de Pleine Conscience",
+  "mindfulnessLevelSeeker": "Chercheur",
+  "mindfulnessLevelObserver": "Observateur",
+  "mindfulnessLevelRationalist": "Rationalisateur",
+  "mindfulnessLevelBalanceMaster": "Maître de l'Équilibre",
+  "mindfulnessLevelGuardianOfClarity": "Gardien de la Clarté",
+  "mindfulnessScoreLabel": "{score} points de conscience",
+  "@mindfulnessScoreLabel": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "mindfulnessProgressToNext": "Vers le niveau suivant : {percent}%",
+  "@mindfulnessProgressToNext": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "mindfulnessMaxLevelReached": "Tu as atteint le sommet de la pleine conscience",
+  "mindfulnessLevelUpMessage": "Nouveau niveau : {level} !",
+  "@mindfulnessLevelUpMessage": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "decisionTagWork": "Travail",
+  "decisionTagRelationships": "Relations",
+  "decisionTagHealth": "Santé",
+  "decisionTagFinances": "Finances",
+  "decisionTagPersonalGrowth": "Développement Personnel",
+  "decisionTagOther": "Autre",
+  "decisionTagPickerLabel": "Catégorie (facultatif)",
+  "statsScreenTitle": "Mes Décisions",
+  "statsEmptyState": "Pas encore de décision terminée — prends la première pour voir tes statistiques",
+  "settingsScreenTitle": "Paramètres",
+  "settingsSubscriptionNone": "Aucun abonnement actif",
+  "settingsSubscriptionExpiresOn": "Actif jusqu'au {date}",
+  "@settingsSubscriptionExpiresOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsUpgradeButton": "Passer à Premium",
+  "settingsLanguageSystemDefault": "Système par défaut"
+}
