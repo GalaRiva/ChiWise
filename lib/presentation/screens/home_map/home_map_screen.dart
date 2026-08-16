@@ -49,6 +49,21 @@ class HomeMapScreen extends ConsumerWidget {
     final List<LocationProgress> progress =
         ref.read(getLocationsProgressUseCaseProvider).call(user.decisionsCount);
 
+    // Локации, где пользователь УЖЕ принял хотя бы одно решение (не просто
+    // открыл по общему счётчику) — на них показывается флаг-отметка на
+    // карточке, см. _LocationCard.hasCompletedDecision.
+    final AuthState authState = ref.read(authNotifierProvider);
+    final String? userId =
+        authState is AuthStateAuthenticated ? authState.uid : null;
+    final Set<int> completedLocationIndices = userId == null
+        ? const {}
+        : ref
+            .read(decisionRepositoryProvider)
+            .getAllDrafts(userId)
+            .where((decision) => decision.status == DecisionStatus.completed)
+            .map((decision) => decision.locationIndexAtCreation)
+            .toSet();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -103,6 +118,8 @@ class HomeMapScreen extends ConsumerWidget {
                   return _LocationCard(
                     progress: item,
                     streakDays: user.streakDays,
+                    hasCompletedDecision:
+                        completedLocationIndices.contains(item.location.index),
                     onTap: () => _onLocationTap(context, ref, l10n, item),
                   );
                 },
@@ -218,6 +235,7 @@ class _LocationCard extends StatelessWidget {
     required this.progress,
     required this.onTap,
     required this.streakDays,
+    required this.hasCompletedDecision,
   });
 
   final LocationProgress progress;
@@ -227,6 +245,12 @@ class _LocationCard extends StatelessWidget {
   /// решить, показывать ли RareEventOverlay (порог streak >= 3, см. задание
   /// Этапа 10c).
   final int streakDays;
+
+  /// true, если у пользователя есть хотя бы одно ЗАВЕРШЁННОЕ решение с
+  /// `locationIndexAtCreation == progress.location.index` — показывает
+  /// флаг-отметку на карточке (см. build()), отдельно от разблокировки по
+  /// общему счётчику решений.
+  final bool hasCompletedDecision;
 
   IconData get _markerIcon {
     switch (progress.location.markerType) {
@@ -301,6 +325,22 @@ class _LocationCard extends StatelessWidget {
               ],
             ),
           ),
+          if (hasCompletedDecision)
+            Positioned(
+              top: 10,
+              right: 10,
+              child: Container(
+                padding: const EdgeInsets.all(6),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.softGold,
+                  boxShadow: [
+                    BoxShadow(color: Colors.black38, blurRadius: 6),
+                  ],
+                ),
+                child: const Icon(Icons.flag, color: AppColors.deepBlue, size: 16),
+              ),
+            ),
         ],
       ),
     );
