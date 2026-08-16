@@ -68,16 +68,17 @@ flutter:
   assets:
     - assets/images/locations/
     - assets/images/icons/
+    - assets/icon/
     - assets/lottie/
 
-# Временный плейсхолдер-иконка/сплэш (assets/icon/), до передачи реальных
-# ассетов дизайнером — см. README.md "Известные ограничения". Перегенерировать
-# после замены исходников: `dart run flutter_launcher_icons` /
+# Реальные иконка/сплэш от дизайнера. Перегенерировать после замены
+# исходников: `dart run flutter_launcher_icons` /
 # `dart run flutter_native_splash:create`.
 flutter_launcher_icons:
   image_path: "assets/icon/app_icon.png"
   android: true
   ios: true
+  remove_alpha_ios: true
   adaptive_icon_background: "#0B1D3A"
   adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
 

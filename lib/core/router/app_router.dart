@@ -15,6 +15,7 @@ import '../../presentation/screens/onboarding/onboarding_screen.dart';
 import '../../presentation/screens/paywall/paywall_screen.dart';
 import '../../presentation/screens/rating/rating_screen.dart';
 import '../../presentation/screens/settings/settings_screen.dart';
+import '../../presentation/screens/splash/splash_screen.dart';
 import '../../presentation/screens/stats/stats_screen.dart';
 
 /// Пути маршрутов по разделам ТЗ. Каждый экран подключается по мере
@@ -22,6 +23,10 @@ import '../../presentation/screens/stats/stats_screen.dart';
 abstract class AppRoutes {
   AppRoutes._();
 
+  /// Анимированный сплэш (лого) — единственный маршрут вне обычной цепочки
+  /// redirect'ов ниже, показывается ровно один раз при холодном старте перед
+  /// онбордингом/входом/картой (см. SplashScreen).
+  static const String splash = '/splash';
   static const String onboarding = '/onboarding';
   static const String auth = '/auth';
   static const String homeMap = '/';
@@ -58,8 +63,13 @@ final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
   final AuthState authState = ref.watch(authNotifierProvider);
 
   return GoRouter(
-    initialLocation: AppRoutes.onboarding,
+    initialLocation: AppRoutes.splash,
     redirect: (context, state) {
+      // Сплэш сам решает, когда уйти (SplashScreen.dart, таймер анимации
+      // логотипа) — до этого момента redirect его не трогает, независимо от
+      // onboardingSeen/authState.
+      if (state.matchedLocation == AppRoutes.splash) return null;
+
       final bool goingToOnboarding =
           state.matchedLocation == AppRoutes.onboarding;
       final bool goingToAuth = state.matchedLocation == AppRoutes.auth;
@@ -84,6 +94,10 @@ final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
+      GoRoute(
+        path: AppRoutes.splash,
+        builder: (context, state) => const SplashScreen(),
+      ),
       GoRoute(
         path: AppRoutes.onboarding,
         builder: (context, state) => const OnboardingScreen(),
