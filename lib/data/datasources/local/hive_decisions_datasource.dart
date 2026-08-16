@@ -61,6 +61,7 @@ class HiveDecisionsDatasource {
       'answerIfNotHappens': decision.answerIfNotHappens,
       'answerNotIfHappens': decision.answerNotIfHappens,
       'answerNotIfNotHappens': decision.answerNotIfNotHappens,
+      'finalDecisionText': decision.finalDecisionText,
       'tag': decision.tag,
       'status': decision.status.name,
       'locationIndexAtCreation': decision.locationIndexAtCreation,
@@ -92,6 +93,7 @@ class HiveDecisionsDatasource {
       answerIfNotHappens: map['answerIfNotHappens'] as String? ?? '',
       answerNotIfHappens: map['answerNotIfHappens'] as String? ?? '',
       answerNotIfNotHappens: map['answerNotIfNotHappens'] as String? ?? '',
+      finalDecisionText: map['finalDecisionText'] as String? ?? '',
       tag: map['tag'] as String?,
       status:
           DecisionStatus.values.byName(map['status'] as String? ?? 'draft'),

@@ -10,3 +10,4 @@ analyzer:
   exclude:
     - "**/*.g.dart"
     - "lib/core/localization/generated/**"
+    - "build/**"

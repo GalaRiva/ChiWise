@@ -80,12 +80,16 @@ class _MagicBallScreenState extends ConsumerState<MagicBallScreen> {
               const Spacer(),
               _MagicBallVisual(
                 isAsking: state.isAsking,
+                answerText: state.answerText,
                 shakeIntensity: state.shakeIntensity,
                 onTap: state.isAsking ? null : () => notifier.ask(languageCode),
               ),
               const SizedBox(height: 24),
+              // Дублирует надпись изнутри шара — крупным шрифтом, чтобы
+              // точно читалось (см. задание: "текст ... в достаточном
+              // размере, чтобы точно все могли прочитать").
               SizedBox(
-                height: 72,
+                height: 84,
                 child: Center(
                   child: state.isAsking
                       ? const CircularProgressIndicator(color: AppColors.turquoise)
@@ -94,7 +98,7 @@ class _MagicBallScreenState extends ConsumerState<MagicBallScreen> {
                           textAlign: TextAlign.center,
                           style: state.answerText == null
                               ? AppTextStyles.bodySecondary
-                              : AppTextStyles.titleMedium
+                              : AppTextStyles.headlineLarge
                                   .copyWith(color: AppColors.softGold),
                         ),
                 ),
@@ -166,24 +170,41 @@ class _EnergyIndicator extends StatelessWidget {
   }
 }
 
-/// Визуальный элемент "шар" — неоморфная окружность с лёгкой реакцией
-/// (scale/glow) на `isAsking`/`shakeIntensity`. Полноценный 3D-стеклянный шар
-/// с частицами — отдельная задача полировки, не этого этапа (см. задание).
+/// Визуальный элемент "шар" — картинка `assets/images/icons/magic_ball.webp`
+/// (предоставлена дизайнером), с реакцией на тряску (scale/glow) и
+/// анимацией "думает": шар постепенно и полностью затемняется, держит паузу
+/// в темноте, затем проявляется вместе со светящимся текстом ответа внутри
+/// стеклянного окошка (см. задание — "постепенно и полностью затемняться и
+/// потом проявляться с надписью"). Таймер анимации подобран под
+/// `MagicBallNotifier.ask()` — там пауза "шар думает" ровно 800мс (см.
+/// magic_ball_provider.dart), поэтому оба Animated-виджета ниже используют
+/// duration в этом же порядке, чтобы затемнение и проявление совпадали по
+/// ощущению с реальным моментом смены `isAsking`/`answerText`.
 class _MagicBallVisual extends StatelessWidget {
   const _MagicBallVisual({
     required this.isAsking,
+    required this.answerText,
     required this.shakeIntensity,
     required this.onTap,
   });
 
   final bool isAsking;
+  final String? answerText;
   final double shakeIntensity;
   final VoidCallback? onTap;
+
+  /// Окошко на картинке шара занимает примерно центральные 44% ширины,
+  /// чуть выше геометрического центра — подобрано вручную по пиксельным
+  /// координатам assets/images/icons/magic_ball.webp (окошко в оригинале
+  /// ~x:280-800, y:280-680 из 1024×1024).
+  static const Alignment _windowAlignment = Alignment(0.0, -0.08);
+  static const double _windowWidthFraction = 0.42;
 
   @override
   Widget build(BuildContext context) {
     final double scale = 1.0 + (isAsking ? 0.06 : shakeIntensity * 0.08);
     final double glow = isAsking ? 28.0 : 14.0 + shakeIntensity * 10.0;
+    final bool showAnswer = !isAsking && answerText != null;
 
     return GestureDetector(
       onTap: onTap,
@@ -191,26 +212,12 @@ class _MagicBallVisual extends StatelessWidget {
         scale: scale,
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeOut,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
+        child: Container(
           width: AppDimens.magicBallSize,
           height: AppDimens.magicBallSize,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: const RadialGradient(
-              colors: [AppColors.deepBlueLight, AppColors.deepBlue],
-            ),
             boxShadow: [
-              const BoxShadow(
-                color: AppColors.neumorphicShadowDark,
-                offset: Offset(AppDimens.neumorphicOffset, AppDimens.neumorphicOffset),
-                blurRadius: AppDimens.neumorphicBlur,
-              ),
-              const BoxShadow(
-                color: AppColors.neumorphicShadowLight,
-                offset: Offset(-AppDimens.neumorphicOffset, -AppDimens.neumorphicOffset),
-                blurRadius: AppDimens.neumorphicBlur,
-              ),
               BoxShadow(
                 color: AppColors.softGold.withValues(alpha: 0.25 + shakeIntensity * 0.25),
                 blurRadius: glow,
@@ -218,11 +225,50 @@ class _MagicBallVisual extends StatelessWidget {
               ),
             ],
           ),
-          alignment: Alignment.center,
-          child: Icon(
-            Icons.blur_circular,
-            size: 64,
-            color: AppColors.turquoise.withValues(alpha: 0.8),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.asset('assets/images/icons/magic_ball.webp'),
+              // Затемнение "шар думает" — нарастает, когда isAsking
+              // становится true, и спадает обратно, открывая ответ.
+              AnimatedOpacity(
+                opacity: isAsking ? 1.0 : 0.0,
+                duration: Duration(milliseconds: isAsking ? 500 : 500),
+                curve: Curves.easeInOut,
+                child: const DecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              // Ответ светится белым "изнутри" стеклянного окошка.
+              Align(
+                alignment: _windowAlignment,
+                child: FractionallySizedBox(
+                  widthFactor: _windowWidthFraction,
+                  child: AnimatedOpacity(
+                    opacity: showAnswer ? 1.0 : 0.0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeIn,
+                    child: Text(
+                      answerText ?? '',
+                      textAlign: TextAlign.center,
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        shadows: const [
+                          Shadow(color: Colors.white, blurRadius: 12),
+                          Shadow(color: AppColors.turquoise, blurRadius: 24),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -7,6 +7,7 @@ import '../../domain/repositories/decision_repository.dart';
 import '../../domain/usecases/decision/create_decision_draft.dart';
 import '../../domain/usecases/decision/update_decision.dart';
 import 'auth_provider.dart';
+import 'user_profile_provider.dart';
 
 final Provider<CreateDecisionDraft> createDecisionDraftUseCaseProvider =
     Provider<CreateDecisionDraft>(
@@ -30,6 +31,7 @@ class DecisionFlowState {
     this.answerIfNotHappens = '',
     this.answerNotIfHappens = '',
     this.answerNotIfNotHappens = '',
+    this.finalDecisionText = '',
     this.argumentCounts = const {},
     this.usedBackspace = true,
   });
@@ -41,6 +43,10 @@ class DecisionFlowState {
   final String answerIfNotHappens;
   final String answerNotIfHappens;
   final String answerNotIfNotHappens;
+
+  /// Итоговое решение пользователя своими словами — экран «Принятие
+  /// решения» (decision_summary_screen.dart), рядом с выбором категории.
+  final String finalDecisionText;
 
   /// 'q1'..'q4' -> число непустых строк в соответствующем блоке.
   final Map<String, int> argumentCounts;
@@ -57,6 +63,7 @@ class DecisionFlowState {
     String? answerIfNotHappens,
     String? answerNotIfHappens,
     String? answerNotIfNotHappens,
+    String? finalDecisionText,
     Map<String, int>? argumentCounts,
     bool? usedBackspace,
   }) {
@@ -69,6 +76,7 @@ class DecisionFlowState {
       answerNotIfHappens: answerNotIfHappens ?? this.answerNotIfHappens,
       answerNotIfNotHappens:
           answerNotIfNotHappens ?? this.answerNotIfNotHappens,
+      finalDecisionText: finalDecisionText ?? this.finalDecisionText,
       argumentCounts: argumentCounts ?? this.argumentCounts,
       usedBackspace: usedBackspace ?? this.usedBackspace,
     );
@@ -110,6 +118,14 @@ class DecisionFlowNotifier extends Notifier<DecisionFlowState> {
 
   void updateDoubtText(String text) {
     state = state.copyWith(doubtText: text);
+    _persist();
+  }
+
+  /// Итоговое решение своими словами — вводится на экране «Принятие
+  /// решения» (decision_summary_screen.dart), тот же паттерн автосохранения,
+  /// что и updateDoubtText/updateAnswer.
+  void updateFinalDecisionText(String text) {
+    state = state.copyWith(finalDecisionText: text);
     _persist();
   }
 
@@ -210,9 +226,15 @@ class DecisionFlowNotifier extends Notifier<DecisionFlowState> {
       answerIfNotHappens: state.answerIfNotHappens,
       answerNotIfHappens: state.answerNotIfHappens,
       answerNotIfNotHappens: state.answerNotIfNotHappens,
+      finalDecisionText: state.finalDecisionText,
       status: DecisionStatus.draft,
-      // TODO(Этап 4): брать текущую локацию пользователя из профиля.
-      locationIndexAtCreation: existing?.locationIndexAtCreation ?? 0,
+      // Локация фиксируется один раз при первом сохранении черновика (не
+      // пересчитывается на каждый keystroke) — так решение остаётся
+      // привязанным к локации, где пользователь его начал, даже если между
+      // сохранениями currentLocationIndex успел измениться.
+      locationIndexAtCreation: existing?.locationIndexAtCreation ??
+          ref.read(userProfileProvider)?.currentLocationIndex ??
+          0,
       createdAt: existing?.createdAt ?? now,
       updatedAt: now,
       argumentCounts: state.argumentCounts,

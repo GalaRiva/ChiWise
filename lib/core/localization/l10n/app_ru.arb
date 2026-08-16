@@ -15,6 +15,8 @@
   "decisionQuestion2": "Что будет, если это НЕ произойдёт?",
   "decisionQuestion3": "Чего НЕ будет, если это произойдёт?",
   "decisionQuestion4": "Чего НЕ будет, если это НЕ произойдёт?",
+  "decisionMyDecisionLabel": "Моё решение",
+  "decisionMyDecisionHint": "Напишите, как вы решили поступить",
   "decisionNext": "Далее",
   "decisionBack": "Назад",
   "decisionCancel": "Отменить",

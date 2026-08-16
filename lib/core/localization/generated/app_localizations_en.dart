@@ -58,6 +58,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get decisionQuestion4 => 'What won\'t happen if it doesn\'t?';
 
   @override
+  String get decisionMyDecisionLabel => 'My decision';
+
+  @override
+  String get decisionMyDecisionHint => 'Write down what you\'ve decided to do';
+
+  @override
   String get decisionNext => 'Next';
 
   @override

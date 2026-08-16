@@ -54,6 +54,22 @@ class _DecisionSummaryScreenState extends ConsumerState<DecisionSummaryScreen> {
   /// (l10n.decisionTagPickerLabel), заполняется только явным тапом.
   String? _selectedTag;
 
+  late final TextEditingController _decisionController;
+
+  @override
+  void initState() {
+    super.initState();
+    _decisionController = TextEditingController(
+      text: ref.read(decisionFlowProvider).finalDecisionText,
+    );
+  }
+
+  @override
+  void dispose() {
+    _decisionController.dispose();
+    super.dispose();
+  }
+
   Future<void> _acceptDecision() async {
     if (_isSaving) return;
     setState(() => _isSaving = true);
@@ -83,6 +99,7 @@ class _DecisionSummaryScreenState extends ConsumerState<DecisionSummaryScreen> {
       answerIfNotHappens: flowState.answerIfNotHappens,
       answerNotIfHappens: flowState.answerNotIfHappens,
       answerNotIfNotHappens: flowState.answerNotIfNotHappens,
+      finalDecisionText: flowState.finalDecisionText,
       tag: _selectedTag ?? existing?.tag,
       status: DecisionStatus.completed,
       locationIndexAtCreation: existing?.locationIndexAtCreation ?? 0,
@@ -247,6 +264,13 @@ class _DecisionSummaryScreenState extends ConsumerState<DecisionSummaryScreen> {
                 ],
               ),
               const SizedBox(height: 20),
+              _MyDecisionField(
+                controller: _decisionController,
+                onChanged: (text) => ref
+                    .read(decisionFlowProvider.notifier)
+                    .updateFinalDecisionText(text),
+              ),
+              const SizedBox(height: 20),
               NeumorphicButton(
                 label: l10n.decisionAccept,
                 onPressed: _isSaving ? null : _acceptDecision,
@@ -353,6 +377,64 @@ String _tagLabel(AppLocalizations l10n, String labelKey) {
       return l10n.decisionTagOther;
     default:
       return labelKey;
+  }
+}
+
+/// Поле «Моё решение» — свободный текст итогового вердикта пользователя.
+/// Слегка подсвечено (золотая рамка + мягкое свечение), чтобы выделяться
+/// среди карточек с ответами выше по экрану, см. задание.
+class _MyDecisionField extends StatelessWidget {
+  const _MyDecisionField({required this.controller, required this.onChanged});
+
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppDimens.cardRadius),
+        border: Border.all(color: AppColors.softGold.withValues(alpha: 0.6)),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.softGold.withValues(alpha: 0.18),
+            blurRadius: 20,
+            spreadRadius: 1,
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.decisionMyDecisionLabel,
+            style: AppTextStyles.titleMedium.copyWith(color: AppColors.softGold),
+          ),
+          const SizedBox(height: 8),
+          TextField(
+            controller: controller,
+            onChanged: onChanged,
+            maxLines: null,
+            minLines: 2,
+            keyboardType: TextInputType.multiline,
+            textCapitalization: TextCapitalization.sentences,
+            style: AppTextStyles.bodyLarge,
+            cursorColor: AppColors.softGold,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              isCollapsed: true,
+              hintText: l10n.decisionMyDecisionHint,
+              hintStyle: AppTextStyles.bodySecondary,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

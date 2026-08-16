@@ -15,6 +15,8 @@
   "decisionQuestion2": "What will happen if it doesn't?",
   "decisionQuestion3": "What won't happen if it does?",
   "decisionQuestion4": "What won't happen if it doesn't?",
+  "decisionMyDecisionLabel": "My decision",
+  "decisionMyDecisionHint": "Write down what you've decided to do",
   "decisionNext": "Next",
   "decisionBack": "Back",
   "decisionCancel": "Cancel",

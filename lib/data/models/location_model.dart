@@ -86,11 +86,11 @@ class LocationModel {
     ),
     LocationModel(
       index: 2,
-      key: 'star_peak',
+      key: 'ocean_boat',
       requiredDecisions: 9,
-      nameKey: 'locationStarPeak',
-      backgroundAsset: 'assets/images/locations/03_star_peak.webp',
-      markerType: LocationMarkerType.star,
+      nameKey: 'locationOceanBoat',
+      backgroundAsset: 'assets/images/locations/05_ocean_boat.webp',
+      markerType: LocationMarkerType.flag,
     ),
     LocationModel(
       index: 3,
@@ -102,11 +102,11 @@ class LocationModel {
     ),
     LocationModel(
       index: 4,
-      key: 'ocean_boat',
+      key: 'star_peak',
       requiredDecisions: 13,
-      nameKey: 'locationOceanBoat',
-      backgroundAsset: 'assets/images/locations/05_ocean_boat.webp',
-      markerType: LocationMarkerType.flag,
+      nameKey: 'locationStarPeak',
+      backgroundAsset: 'assets/images/locations/03_star_peak.webp',
+      markerType: LocationMarkerType.star,
     ),
     LocationModel(
       index: 5,

@@ -15,6 +15,7 @@ class DecisionModel {
     this.answerIfNotHappens = '',
     this.answerNotIfHappens = '',
     this.answerNotIfNotHappens = '',
+    this.finalDecisionText = '',
     this.tag,
     this.status = DecisionStatus.draft,
     required this.locationIndexAtCreation,
@@ -43,6 +44,10 @@ class DecisionModel {
 
   /// Чего НЕ будет, если это НЕ произойдёт?
   final String answerNotIfNotHappens;
+
+  /// Итоговое решение пользователя своими словами — свободный текст,
+  /// вводится на экране «Принятие решения» рядом с категорией (tag).
+  final String finalDecisionText;
 
   /// Категория для bubble chart и ачивки «Парад планет» (работа/отношения/покупки…).
   final String? tag;
@@ -74,6 +79,7 @@ class DecisionModel {
       answerIfNotHappens: json['answerIfNotHappens'] as String? ?? '',
       answerNotIfHappens: json['answerNotIfHappens'] as String? ?? '',
       answerNotIfNotHappens: json['answerNotIfNotHappens'] as String? ?? '',
+      finalDecisionText: json['finalDecisionText'] as String? ?? '',
       tag: json['tag'] as String?,
       status: DecisionStatus.values.byName(
         json['status'] as String? ?? 'draft',
@@ -98,6 +104,7 @@ class DecisionModel {
       'answerIfNotHappens': answerIfNotHappens,
       'answerNotIfHappens': answerNotIfHappens,
       'answerNotIfNotHappens': answerNotIfNotHappens,
+      'finalDecisionText': finalDecisionText,
       'tag': tag,
       'status': status.name,
       'locationIndexAtCreation': locationIndexAtCreation,
@@ -116,6 +123,7 @@ class DecisionModel {
     String? answerIfNotHappens,
     String? answerNotIfHappens,
     String? answerNotIfNotHappens,
+    String? finalDecisionText,
     String? tag,
     DecisionStatus? status,
     DateTime? updatedAt,
@@ -133,6 +141,7 @@ class DecisionModel {
       answerNotIfHappens: answerNotIfHappens ?? this.answerNotIfHappens,
       answerNotIfNotHappens:
           answerNotIfNotHappens ?? this.answerNotIfNotHappens,
+      finalDecisionText: finalDecisionText ?? this.finalDecisionText,
       tag: tag ?? this.tag,
       status: status ?? this.status,
       locationIndexAtCreation: locationIndexAtCreation,

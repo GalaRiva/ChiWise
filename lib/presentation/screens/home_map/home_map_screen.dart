@@ -253,23 +253,54 @@ class _LocationCard extends StatelessWidget {
 
     final Widget content = Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      height: 128,
       decoration: BoxDecoration(
-        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppDimens.cardRadius),
         border: progress.isCurrent
             ? Border.all(color: AppColors.softGold.withValues(alpha: 0.6))
             : null,
       ),
-      child: Row(
+      clipBehavior: Clip.antiAlias,
+      child: Stack(
+        fit: StackFit.expand,
         children: [
-          Icon(_markerIcon, color: _markerColor, size: 28),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Text(_name(l10n), style: AppTextStyles.titleMedium),
+          // Фон локации (LocationModel.backgroundAsset) — картинка есть у
+          // всех 16 локаций (плейсхолдер, если ещё не заменена дизайнером).
+          Image.asset(progress.location.backgroundAsset, fit: BoxFit.cover),
+          // Затемняющий градиент снизу, чтобы название/иконка читались
+          // поверх любой картинки.
+          const DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.transparent, Color(0xB30B1D3A)],
+                stops: [0.3, 1.0],
+              ),
+            ),
           ),
-          if (progress.isUnlocked)
-            const Icon(Icons.chevron_right, color: AppColors.textSecondary),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Icon(_markerIcon, color: _markerColor, size: 28),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    _name(l10n),
+                    style: AppTextStyles.titleMedium.copyWith(
+                      shadows: const [
+                        Shadow(color: Colors.black54, blurRadius: 6),
+                      ],
+                    ),
+                  ),
+                ),
+                if (progress.isUnlocked)
+                  const Icon(Icons.chevron_right, color: Colors.white),
+              ],
+            ),
+          ),
         ],
       ),
     );

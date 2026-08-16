@@ -34,6 +34,7 @@ class DecisionDetailScreen extends ConsumerStatefulWidget {
 class _DecisionDetailScreenState extends ConsumerState<DecisionDetailScreen> {
   DecisionModel? _decision;
   late final List<TextEditingController> _answerControllers;
+  late final TextEditingController _finalDecisionController;
   bool _isSaving = false;
 
   @override
@@ -51,6 +52,8 @@ class _DecisionDetailScreenState extends ConsumerState<DecisionDetailScreen> {
       TextEditingController(text: decision?.answerNotIfHappens ?? ''),
       TextEditingController(text: decision?.answerNotIfNotHappens ?? ''),
     ];
+    _finalDecisionController =
+        TextEditingController(text: decision?.finalDecisionText ?? '');
   }
 
   @override
@@ -58,6 +61,7 @@ class _DecisionDetailScreenState extends ConsumerState<DecisionDetailScreen> {
     for (final TextEditingController controller in _answerControllers) {
       controller.dispose();
     }
+    _finalDecisionController.dispose();
     super.dispose();
   }
 
@@ -72,6 +76,7 @@ class _DecisionDetailScreenState extends ConsumerState<DecisionDetailScreen> {
       answerIfNotHappens: _answerControllers[1].text,
       answerNotIfHappens: _answerControllers[2].text,
       answerNotIfNotHappens: _answerControllers[3].text,
+      finalDecisionText: _finalDecisionController.text,
       updatedAt: DateTime.now(),
     );
 
@@ -151,7 +156,35 @@ class _DecisionDetailScreenState extends ConsumerState<DecisionDetailScreen> {
                 _AnswerField(controller: _answerControllers[step]),
                 const SizedBox(height: 20),
               ],
+              Text(
+                l10n.decisionMyDecisionLabel,
+                style: AppTextStyles.titleMedium.copyWith(color: AppColors.softGold),
+              ),
               const SizedBox(height: 8),
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(AppDimens.cardRadius),
+                  border: Border.all(color: AppColors.softGold.withValues(alpha: 0.6)),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: TextField(
+                  controller: _finalDecisionController,
+                  maxLines: null,
+                  minLines: 2,
+                  keyboardType: TextInputType.multiline,
+                  textCapitalization: TextCapitalization.sentences,
+                  style: AppTextStyles.bodyLarge,
+                  cursorColor: AppColors.softGold,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    isCollapsed: true,
+                    hintText: l10n.decisionMyDecisionHint,
+                    hintStyle: AppTextStyles.bodySecondary,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
               NeumorphicButton(
                 label: l10n.decisionDetailSave,
                 onPressed: _isSaving ? null : () => _save(l10n),

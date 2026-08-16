@@ -15,6 +15,8 @@
   "decisionQuestion2": "Que se passera-t-il si cela n'arrive pas ?",
   "decisionQuestion3": "Que ne se passera-t-il PAS si cela arrive ?",
   "decisionQuestion4": "Que ne se passera-t-il PAS si cela n'arrive pas ?",
+  "decisionMyDecisionLabel": "Ma décision",
+  "decisionMyDecisionHint": "Écrivez ce que vous avez décidé de faire",
   "decisionNext": "Suivant",
   "decisionBack": "Retour",
   "decisionCancel": "Annuler",

@@ -7,5 +7,5 @@ class AppDimens {
   static const double buttonRadius = 18;
   static const double neumorphicBlur = 16;
   static const double neumorphicOffset = 8;
-  static const double magicBallSize = 220;
+  static const double magicBallSize = 280;
 }

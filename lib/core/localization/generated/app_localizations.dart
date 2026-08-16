@@ -194,6 +194,18 @@ abstract class AppLocalizations {
   /// **'What won\'t happen if it doesn\'t?'**
   String get decisionQuestion4;
 
+  /// No description provided for @decisionMyDecisionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'My decision'**
+  String get decisionMyDecisionLabel;
+
+  /// No description provided for @decisionMyDecisionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write down what you\'ve decided to do'**
+  String get decisionMyDecisionHint;
+
   /// No description provided for @decisionNext.
   ///
   /// In en, this message translates to:
