@@ -121,9 +121,15 @@ class MagicBallNotifier extends Notifier<MagicBallState> {
 
     state = state.copyWith(shakeIntensity: value);
 
-    final bool hasPendingResult =
-        state.answerText != null || state.blockReason != null;
-    if (value > kMagicBallShakeThreshold && !state.isAsking && !hasPendingResult) {
+    // ВАЖНО (нашли по фидбэку): раньше сюда входило ещё и `answerText != null`,
+    // из-за чего после ПЕРВОГО ответа тряска переставала работать навсегда —
+    // блокировка снималась только явным нажатием кнопки/тапом по шару
+    // (оба вызывают ask() напрямую, минуя эту проверку). Тряска должна
+    // работать на каждый новый вопрос точно так же, как тап — блокируем
+    // повторные срабатывания только пока реально идёт блокировка
+    // (лимит/энергия), а не пока просто показан предыдущий ответ.
+    final bool isBlocked = state.blockReason != null;
+    if (value > kMagicBallShakeThreshold && !state.isAsking && !isBlocked) {
       // Fire-and-forget: тряска не должна блокировать UI-поток ожиданием
       // Future, а результат придёт через state-обновления самого ask().
       // ignore: discarded_futures

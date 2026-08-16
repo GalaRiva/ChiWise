@@ -89,22 +89,39 @@ class _MagicBallScreenState extends ConsumerState<MagicBallScreen> {
               const SizedBox(height: 24),
               // Дублирует надпись изнутри шара — крупным шрифтом, чтобы
               // точно читалось (см. задание: "текст ... в достаточном
-              // размере, чтобы точно все могли прочитать"). Пока ответа нет —
-              // явная подсказка "нажми или тряхни" крупнее и заметнее
-              // обычного вторичного текста, чтобы точно бросалась в глаза.
+              // размере, чтобы точно все могли прочитать").
+              //
+              // ВАЖНО (нашли по фидбэку): подсказка "нажми или тряхни" раньше
+              // показывалась ТОЛЬКО пока answerText ещё ни разу не был
+              // установлен — после первого ответа исчезала навсегда, хотя
+              // спросить снова (тапом или тряской, см. фикс в
+              // magic_ball_provider.dart) можно и дальше. Теперь подсказка —
+              // отдельная строка, которая появляется заново под КАЖДЫМ
+              // ответом, а не только перед первым вопросом.
               SizedBox(
-                height: 84,
+                height: 112,
                 child: Center(
                   child: state.isAsking
                       ? const CircularProgressIndicator(color: AppColors.turquoise)
-                      : Text(
-                          state.answerText ?? l10n.magicBallShakeHint,
-                          textAlign: TextAlign.center,
-                          style: state.answerText == null
-                              ? AppTextStyles.bodyLarge
-                                  .copyWith(color: AppColors.turquoise)
-                              : AppTextStyles.headlineLarge
-                                  .copyWith(color: AppColors.softGold),
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (state.answerText != null)
+                              Text(
+                                state.answerText!,
+                                textAlign: TextAlign.center,
+                                style: AppTextStyles.headlineLarge
+                                    .copyWith(color: AppColors.softGold),
+                              ),
+                            if (state.answerText != null)
+                              const SizedBox(height: 8),
+                            Text(
+                              l10n.magicBallShakeHint,
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.bodyLarge
+                                  .copyWith(color: AppColors.turquoise),
+                            ),
+                          ],
                         ),
                 ),
               ),

@@ -9,6 +9,7 @@ import '../../presentation/screens/decision_detail/decision_detail_screen.dart';
 import '../../presentation/screens/decision_flow/decision_flow_screen.dart';
 import '../../presentation/screens/decision_summary/decision_summary_screen.dart';
 import '../../presentation/screens/home_map/home_map_screen.dart';
+import '../../presentation/screens/location_detail/location_detail_screen.dart';
 import '../../presentation/screens/magic_ball/magic_ball_screen.dart';
 import '../../presentation/screens/mindfulness/mindfulness_screen.dart';
 import '../../presentation/screens/onboarding/onboarding_screen.dart';
@@ -37,6 +38,11 @@ abstract class AppRoutes {
   /// Используй [decisionDetailPath] для построения конкретного URL при
   /// переходе (напр. с карты локаций — Этап 4), а не эту константу напрямую.
   static const String decisionDetail = '/decision-detail/:id';
+
+  /// Полное изображение локации с флажками (по одному на каждое завершённое
+  /// решение) — открывается тапом по карточке на карте (Этап 4/фидбэк).
+  /// Используй [locationDetailPath], не эту константу напрямую.
+  static const String locationDetail = '/location-detail/:index';
   static const String magicBall = '/magic-ball';
   static const String achievements = '/achievements';
   static const String profileStats = '/profile-stats';
@@ -50,6 +56,10 @@ abstract class AppRoutes {
   /// Строит конкретный URL записи решения из [decisionDetail], напр.
   /// `AppRoutes.decisionDetailPath('abc123')` -> `/decision-detail/abc123`.
   static String decisionDetailPath(String id) => '/decision-detail/$id';
+
+  /// Строит конкретный URL из [locationDetail], напр.
+  /// `AppRoutes.locationDetailPath(2)` -> `/location-detail/2`.
+  static String locationDetailPath(int index) => '/location-detail/$index';
 }
 
 final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
@@ -122,6 +132,12 @@ final Provider<GoRouter> appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.decisionDetail,
         builder: (context, state) => DecisionDetailScreen(
           decisionId: state.pathParameters['id']!,
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.locationDetail,
+        builder: (context, state) => LocationDetailScreen(
+          locationIndex: int.parse(state.pathParameters['index']!),
         ),
       ),
       GoRoute(

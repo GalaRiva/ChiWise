@@ -13,7 +13,6 @@ import '../../../data/models/decision_model.dart';
 import '../../../data/models/location_model.dart';
 import '../../../data/models/user_model.dart';
 import '../../../data/repositories/decision_repository_impl.dart';
-import '../../../domain/repositories/decision_repository.dart';
 import '../../../domain/usecases/gamification/get_locations_progress.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/decision_flow_provider.dart';
@@ -156,39 +155,9 @@ class HomeMapScreen extends ConsumerWidget {
       return;
     }
 
-    final AuthState authState = ref.read(authNotifierProvider);
-    final String? userId =
-        authState is AuthStateAuthenticated ? authState.uid : null;
-    final DecisionRepository repository = ref.read(decisionRepositoryProvider);
-
-    final List<DecisionModel> decisions = userId == null
-        ? const []
-        : repository
-            .getAllDrafts(userId)
-            .where((decision) =>
-                decision.locationIndexAtCreation == item.location.index &&
-                decision.status == DecisionStatus.completed)
-            .toList();
-
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: AppColors.surface,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AppDimens.cardRadius)),
-      ),
-      builder: (sheetContext) {
-        return _LocationDecisionsSheet(
-          title: l10n.homeMapDecisionsHereTitle,
-          emptyText: l10n.homeMapNoDecisionsHere,
-          decisions: decisions,
-          onSelect: (decision) {
-            Navigator.of(sheetContext).pop();
-            context.push(AppRoutes.decisionDetailPath(decision.id));
-          },
-        );
-      },
-    );
+    // Полное изображение локации с флажками (по одному на каждое решение),
+    // см. LocationDetailScreen — заменяет прежнюю шторку со списком.
+    context.push(AppRoutes.locationDetailPath(item.location.index));
   }
 }
 
@@ -269,7 +238,7 @@ class _LocationCard extends StatelessWidget {
     return AppColors.turquoise;
   }
 
-  String _name(AppLocalizations l10n) => _locationName(l10n, progress.location.nameKey);
+  String _name(AppLocalizations l10n) => locationName(l10n, progress.location.nameKey);
 
   @override
   Widget build(BuildContext context) {
@@ -410,75 +379,11 @@ class _LocationCard extends StatelessWidget {
   }
 }
 
-/// Содержимое `showModalBottomSheet` со списком завершённых решений локации.
-class _LocationDecisionsSheet extends StatelessWidget {
-  const _LocationDecisionsSheet({
-    required this.title,
-    required this.emptyText,
-    required this.decisions,
-    required this.onSelect,
-  });
-
-  final String title;
-  final String emptyText;
-  final List<DecisionModel> decisions;
-  final ValueChanged<DecisionModel> onSelect;
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-          AppDimens.screenPadding,
-          20,
-          AppDimens.screenPadding,
-          20,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(title, style: AppTextStyles.titleMedium),
-            const SizedBox(height: 12),
-            if (decisions.isEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Text(emptyText, style: AppTextStyles.bodySecondary),
-              )
-            else
-              Flexible(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: decisions.length,
-                  itemBuilder: (context, index) {
-                    final DecisionModel decision = decisions[index];
-                    final String doubt = decision.doubtText.trim();
-                    final String preview =
-                        doubt.length > 80 ? '${doubt.substring(0, 80)}…' : doubt;
-                    return ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(
-                        preview.isEmpty ? '—' : '«$preview»',
-                        style: AppTextStyles.bodyLarge,
-                      ),
-                      trailing: const Icon(Icons.chevron_right, color: AppColors.textSecondary),
-                      onTap: () => onSelect(decision),
-                    );
-                  },
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 /// `LocationModel.nameKey` — строка, сгенерированный `AppLocalizations` не
 /// поддерживает вызов геттера по имени этой строки, поэтому нужен явный
 /// switch/map от `nameKey` к соответствующему геттеру `l10n.locationXxx`
 /// (см. задание Этапа 4, пункт G).
-String _locationName(AppLocalizations l10n, String nameKey) {
+String locationName(AppLocalizations l10n, String nameKey) {
   switch (nameKey) {
     case 'locationRiverField':
       return l10n.locationRiverField;
