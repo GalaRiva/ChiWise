@@ -8,9 +8,11 @@ import '../../../core/localization/generated/app_localizations.dart';
 import '../../../core/router/app_router.dart';
 import '../../../data/models/decision_model.dart';
 import '../../../data/models/location_model.dart';
+import '../../../data/models/user_model.dart';
 import '../../../data/repositories/decision_repository_impl.dart';
 import '../../../domain/repositories/decision_repository.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/user_profile_provider.dart';
 import '../home_map/home_map_screen.dart' show locationName;
 
 /// Полноэкранное изображение локации с флажками — по одному на каждое
@@ -24,6 +26,10 @@ import '../home_map/home_map_screen.dart' show locationName;
 /// детерминированные (не меняются между открытиями экрана): раскладка по
 /// сетке ~4 колонки + небольшой сдвиг, зависящий от `decision.id`, чтобы
 /// флажки не ложились ровно друг на друга при нескольких решениях подряд.
+///
+/// Свайп вверх/вниз переключает на следующую/предыдущую ОТКРЫТУЮ локацию
+/// (см. фидбэк) — `pushReplacement`, а не `push`, чтобы серия свайпов не
+/// раздувала стек навигации, а кнопка "назад" всё так же вела на карту.
 class LocationDetailScreen extends ConsumerWidget {
   const LocationDetailScreen({super.key, required this.locationIndex});
 
@@ -33,6 +39,15 @@ class LocationDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final LocationModel location = LocationModel.locations[locationIndex];
+    final UserModel? user = ref.watch(userProfileProvider);
+    final int decisionsCount = user?.decisionsCount ?? 0;
+
+    final int? previousIndex = locationIndex > 0 ? locationIndex - 1 : null;
+    final int? nextIndex =
+        locationIndex < LocationModel.locations.length - 1 &&
+                LocationModel.isUnlocked(locationIndex + 1, decisionsCount)
+            ? locationIndex + 1
+            : null;
 
     final AuthState authState = ref.read(authNotifierProvider);
     final String? userId =
@@ -60,50 +75,102 @@ class LocationDetailScreen extends ConsumerWidget {
           ),
         ),
       ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset(location.backgroundAsset, fit: BoxFit.cover),
-          // Затемнение сверху (под AppBar) и снизу — так заголовок и
-          // флажки у самого низа картинки остаются читаемыми на любом фоне.
-          const DecoratedBox(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xB30B1D3A),
-                  Colors.transparent,
-                  Colors.transparent,
-                  Color(0x800B1D3A),
-                ],
-                stops: [0.0, 0.18, 0.75, 1.0],
-              ),
-            ),
-          ),
-          if (decisions.isEmpty)
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Text(
-                  l10n.homeMapNoDecisionsHere,
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.bodyLarge.copyWith(
-                    shadows: const [Shadow(color: Colors.black87, blurRadius: 8)],
-                  ),
+      body: GestureDetector(
+        // primaryVelocity > 0 — палец движется ВНИЗ (свайп вниз) -> предыдущая
+        // локация; < 0 — палец движется ВВЕРХ (свайп вверх) -> следующая.
+        onVerticalDragEnd: (details) {
+          final double? velocity = details.primaryVelocity;
+          if (velocity == null) return;
+          const double kSwipeThreshold = 250;
+          if (velocity < -kSwipeThreshold && nextIndex != null) {
+            context.pushReplacement(AppRoutes.locationDetailPath(nextIndex));
+          } else if (velocity > kSwipeThreshold && previousIndex != null) {
+            context.pushReplacement(AppRoutes.locationDetailPath(previousIndex));
+          }
+        },
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.asset(location.backgroundAsset, fit: BoxFit.cover),
+            // Затемнение сверху (под AppBar) и снизу — так заголовок и
+            // флажки у самого низа картинки остаются читаемыми на любом фоне.
+            const DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xB30B1D3A),
+                    Colors.transparent,
+                    Colors.transparent,
+                    Color(0x800B1D3A),
+                  ],
+                  stops: [0.0, 0.18, 0.75, 1.0],
                 ),
               ),
-            )
-          else
-            for (int i = 0; i < decisions.length; i++)
-              _DecisionFlag(
-                decision: decisions[i],
-                index: i,
-                total: decisions.length,
-                onTap: () =>
-                    context.push(AppRoutes.decisionDetailPath(decisions[i].id)),
+            ),
+            if (decisions.isEmpty)
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Text(
+                    l10n.homeMapNoDecisionsHere,
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.bodyLarge.copyWith(
+                      shadows: const [Shadow(color: Colors.black87, blurRadius: 8)],
+                    ),
+                  ),
+                ),
+              )
+            else
+              for (int i = 0; i < decisions.length; i++)
+                _DecisionFlag(
+                  decision: decisions[i],
+                  index: i,
+                  total: decisions.length,
+                  onTap: () =>
+                      context.push(AppRoutes.decisionDetailPath(decisions[i].id)),
+                ),
+            // Подсказки свайпа — тонкие шевроны у верхнего/нижнего края,
+            // только когда соответствующий свайп реально куда-то ведёт.
+            if (previousIndex != null)
+              const Positioned(
+                top: 100,
+                left: 0,
+                right: 0,
+                child: _SwipeHint(icon: Icons.keyboard_arrow_up),
               ),
-        ],
+            if (nextIndex != null)
+              const Positioned(
+                bottom: 24,
+                left: 0,
+                right: 0,
+                child: _SwipeHint(icon: Icons.keyboard_arrow_down),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Тонкая подсказка направления свайпа — шеврон + лёгкое пульсирующее
+/// свечение, не перетягивает внимание с самой локации/флажков.
+class _SwipeHint extends StatelessWidget {
+  const _SwipeHint({required this.icon});
+
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(
+      child: Center(
+        child: Icon(
+          icon,
+          color: Colors.white.withValues(alpha: 0.55),
+          size: 28,
+          shadows: const [Shadow(color: Colors.black54, blurRadius: 6)],
+        ),
       ),
     );
   }
