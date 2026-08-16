@@ -496,4 +496,31 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsLanguageSystemDefault => 'Système par défaut';
+
+  @override
+  String get settingsAccountSection => 'Compte';
+
+  @override
+  String get settingsDeleteAccountButton => 'Supprimer le compte';
+
+  @override
+  String get settingsDeleteAccountConfirmTitle => 'Supprimer le compte ?';
+
+  @override
+  String get settingsDeleteAccountConfirmMessage =>
+      'Toutes vos décisions, votre progression et votre abonnement seront définitivement supprimés. Cette action est irréversible.';
+
+  @override
+  String get settingsDeleteAccountConfirmYes => 'Oui, supprimer';
+
+  @override
+  String get settingsDeleteAccountConfirmNo => 'Annuler';
+
+  @override
+  String get settingsDeleteAccountError =>
+      'Impossible de supprimer le compte. Essayez de vous déconnecter puis reconnecter, et réessayez.';
+
+  @override
+  String get magicBallEnergyHint =>
+      'L\'énergie se recharge de +25 pour chaque décision que vous terminez';
 }

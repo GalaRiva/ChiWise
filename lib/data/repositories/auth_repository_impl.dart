@@ -110,6 +110,17 @@ class AuthRepositoryImpl implements AuthRepository {
     await _firebaseAuth.signOut();
   }
 
+  @override
+  Future<void> deleteAccount() async {
+    if (await _googleSignIn.isSignedIn()) {
+      await _googleSignIn.signOut();
+    }
+    // `fb.User.delete()` бросает `requires-recent-login`, если сессия
+    // "старая" — вызывающий UI (settings_screen.dart) ловит это отдельно и
+    // просит войти заново, а не молча глотает ошибку.
+    await _firebaseAuth.currentUser?.delete();
+  }
+
   /// google_sign_in ^6.x: `GoogleSignIn().signIn()` -> `GoogleSignInAccount?`,
   /// далее `.authentication` -> accessToken/idToken для Firebase credential.
   Future<fb.OAuthCredential> _googleAuthCredential() async {

@@ -193,5 +193,13 @@
     }
   },
   "settingsUpgradeButton": "Get Premium",
-  "settingsLanguageSystemDefault": "System default"
+  "settingsLanguageSystemDefault": "System default",
+  "settingsAccountSection": "Account",
+  "settingsDeleteAccountButton": "Delete account",
+  "settingsDeleteAccountConfirmTitle": "Delete account?",
+  "settingsDeleteAccountConfirmMessage": "All your decisions, progress and subscription will be permanently deleted. This cannot be undone.",
+  "settingsDeleteAccountConfirmYes": "Yes, delete",
+  "settingsDeleteAccountConfirmNo": "Cancel",
+  "settingsDeleteAccountError": "Couldn't delete the account. Try signing out and back in, then try again.",
+  "magicBallEnergyHint": "Energy refills by +25 for every decision you complete"
 }

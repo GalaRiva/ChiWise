@@ -193,5 +193,13 @@
     }
   },
   "settingsUpgradeButton": "Obter Premium",
-  "settingsLanguageSystemDefault": "Padrão do sistema"
+  "settingsLanguageSystemDefault": "Padrão do sistema",
+  "settingsAccountSection": "Conta",
+  "settingsDeleteAccountButton": "Excluir conta",
+  "settingsDeleteAccountConfirmTitle": "Excluir conta?",
+  "settingsDeleteAccountConfirmMessage": "Todas as suas decisões, progresso e assinatura serão excluídos permanentemente. Esta ação não pode ser desfeita.",
+  "settingsDeleteAccountConfirmYes": "Sim, excluir",
+  "settingsDeleteAccountConfirmNo": "Cancelar",
+  "settingsDeleteAccountError": "Não foi possível excluir a conta. Tente sair e entrar novamente, depois tente de novo.",
+  "magicBallEnergyHint": "A energia se recupera em +25 a cada decisão que você completa"
 }

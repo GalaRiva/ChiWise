@@ -492,4 +492,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsLanguageSystemDefault => 'System default';
+
+  @override
+  String get settingsAccountSection => 'Account';
+
+  @override
+  String get settingsDeleteAccountButton => 'Delete account';
+
+  @override
+  String get settingsDeleteAccountConfirmTitle => 'Delete account?';
+
+  @override
+  String get settingsDeleteAccountConfirmMessage =>
+      'All your decisions, progress and subscription will be permanently deleted. This cannot be undone.';
+
+  @override
+  String get settingsDeleteAccountConfirmYes => 'Yes, delete';
+
+  @override
+  String get settingsDeleteAccountConfirmNo => 'Cancel';
+
+  @override
+  String get settingsDeleteAccountError =>
+      'Couldn\'t delete the account. Try signing out and back in, then try again.';
+
+  @override
+  String get magicBallEnergyHint =>
+      'Energy refills by +25 for every decision you complete';
 }

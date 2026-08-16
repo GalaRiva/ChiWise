@@ -53,6 +53,15 @@ class FirestoreUserDatasource {
       // комментарий класса.
     }
   }
+
+  /// Удаляет документ профиля. Молча ничего не делает при любой ошибке.
+  Future<void> deleteUser(String uid) async {
+    try {
+      await _userDoc(uid).delete();
+    } catch (_) {
+      // См. комментарий класса.
+    }
+  }
 }
 
 /// Провайдер датасорса. Конструктор `FirestoreUserDatasource()` ничего не

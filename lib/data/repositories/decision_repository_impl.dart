@@ -51,6 +51,27 @@ class DecisionRepositoryImpl implements DecisionRepository {
     await _tryMirrorToFirestore(decision);
   }
 
+  @override
+  Future<void> deleteAllForUser(String userId) async {
+    // Локально (Hive) — источник истины, поэтому по нему и определяем,
+    // что удалять.
+    for (final DecisionModel decision in _localDatasource.getAllDrafts(userId)) {
+      await _localDatasource.deleteDraft(decision.id);
+    }
+    // Firestore — best-effort, отдельным проходом по РЕАЛЬНОМУ списку
+    // документов там (может отличаться от Hive, если синк когда-то не
+    // дошёл), а не по уже удалённому локальному списку выше.
+    try {
+      for (final DecisionModel decision
+          in await _remoteDatasource.getAllDecisions(userId)) {
+        await _remoteDatasource.deleteDecision(userId, decision.id);
+      }
+    } catch (_) {
+      // См. комментарий класса — Firestore-часть никогда не должна ронять
+      // основной путь удаления.
+    }
+  }
+
   /// Best-effort зеркалирование в Firestore — см. комментарий класса.
   Future<void> _tryMirrorToFirestore(DecisionModel decision) async {
     try {

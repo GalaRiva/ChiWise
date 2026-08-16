@@ -29,6 +29,16 @@ class UserRepositoryImpl implements UserRepository {
     await _tryMirrorToFirestore(user);
   }
 
+  @override
+  Future<void> deleteUser(String uid) async {
+    await _localDatasource.deleteUser(uid);
+    try {
+      await _remoteDatasource.deleteUser(uid);
+    } catch (_) {
+      // См. _tryMirrorToFirestore — Firestore-часть best-effort.
+    }
+  }
+
   /// Best-effort зеркалирование в Firestore — см. комментарий класса.
   Future<void> _tryMirrorToFirestore(UserModel user) async {
     try {

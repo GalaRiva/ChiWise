@@ -9,4 +9,8 @@ abstract class UserRepository {
   UserModel? getUser(String uid);
 
   Future<void> saveUser(UserModel user);
+
+  /// Удаляет профиль (Hive + Firestore) — используется при удалении
+  /// аккаунта, см. DeleteAccount usecase.
+  Future<void> deleteUser(String uid);
 }

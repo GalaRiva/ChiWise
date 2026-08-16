@@ -38,6 +38,8 @@ class HiveUserDatasource {
     return _box.put(user.id, _toMap(user));
   }
 
+  Future<void> deleteUser(String uid) => _box.delete(uid);
+
   // --- Сериализация ---
 
   Map<String, dynamic> _toMap(UserModel user) {

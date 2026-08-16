@@ -973,6 +973,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'System default'**
   String get settingsLanguageSystemDefault;
+
+  /// No description provided for @settingsAccountSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get settingsAccountSection;
+
+  /// No description provided for @settingsDeleteAccountButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get settingsDeleteAccountButton;
+
+  /// No description provided for @settingsDeleteAccountConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account?'**
+  String get settingsDeleteAccountConfirmTitle;
+
+  /// No description provided for @settingsDeleteAccountConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'All your decisions, progress and subscription will be permanently deleted. This cannot be undone.'**
+  String get settingsDeleteAccountConfirmMessage;
+
+  /// No description provided for @settingsDeleteAccountConfirmYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, delete'**
+  String get settingsDeleteAccountConfirmYes;
+
+  /// No description provided for @settingsDeleteAccountConfirmNo.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get settingsDeleteAccountConfirmNo;
+
+  /// No description provided for @settingsDeleteAccountError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t delete the account. Try signing out and back in, then try again.'**
+  String get settingsDeleteAccountError;
+
+  /// No description provided for @magicBallEnergyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy refills by +25 for every decision you complete'**
+  String get magicBallEnergyHint;
 }
 
 class _AppLocalizationsDelegate

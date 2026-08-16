@@ -36,4 +36,11 @@ abstract class AuthRepository {
   Future<String> linkAnonymousAccount(AuthProviderType provider);
 
   Future<void> signOut();
+
+  /// Удаляет ТЕКУЩИЙ аккаунт Firebase Auth безвозвратно (Google Play требует
+  /// эту возможность для приложений с регистрацией — см. Настройки).
+  /// ВАЖНО: вызывающий код должен удалить данные пользователя (Firestore/
+  /// Hive) ДО этого вызова, пока `request.auth.uid` ещё валиден для правил
+  /// безопасности Firestore — см. DeleteAccount usecase.
+  Future<void> deleteAccount();
 }

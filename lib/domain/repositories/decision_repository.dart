@@ -25,4 +25,9 @@ abstract class DecisionRepository {
   /// DecisionSummaryScreen после нажатия «Решение принято» (см.
   /// lib/presentation/screens/decision_summary/decision_summary_screen.dart).
   Future<void> completeDecision(DecisionModel decision);
+
+  /// Удаляет ВСЕ решения пользователя (черновики и завершённые), локально и
+  /// в Firestore — используется при удалении аккаунта (см. DeleteAccount
+  /// usecase, settings_screen.dart).
+  Future<void> deleteAllForUser(String userId);
 }

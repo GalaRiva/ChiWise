@@ -163,7 +163,11 @@ class _MagicBallScreenState extends ConsumerState<MagicBallScreen> {
 }
 
 /// Простой индикатор энергии Шара (0-100) — `LinearProgressIndicator`,
-/// цвет меняется на "тревожный" ниже стоимости одного вопроса.
+/// цвет меняется на "тревожный" ниже стоимости одного вопроса. Подпись под
+/// баром явно объясняет механику восполнения (см. фидбэк — раньше это
+/// нигде не было написано, и было непонятно, как энергия вообще
+/// пополняется): +25 за каждое завершённое решение, никакого автоматического
+/// восстановления по времени нет.
 class _EnergyIndicator extends StatelessWidget {
   const _EnergyIndicator({required this.energy});
 
@@ -171,6 +175,7 @@ class _EnergyIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     final bool isLow = energy < kMagicBallEnergyCost;
     return Column(
       children: [
@@ -187,6 +192,12 @@ class _EnergyIndicator extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text('$energy / 100', style: AppTextStyles.bodySecondary),
+        const SizedBox(height: 2),
+        Text(
+          l10n.magicBallEnergyHint,
+          textAlign: TextAlign.center,
+          style: AppTextStyles.bodySecondary.copyWith(fontSize: 12),
+        ),
       ],
     );
   }

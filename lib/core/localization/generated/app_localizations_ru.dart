@@ -490,4 +490,31 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsLanguageSystemDefault => 'Как в системе';
+
+  @override
+  String get settingsAccountSection => 'Аккаунт';
+
+  @override
+  String get settingsDeleteAccountButton => 'Удалить аккаунт';
+
+  @override
+  String get settingsDeleteAccountConfirmTitle => 'Удалить аккаунт?';
+
+  @override
+  String get settingsDeleteAccountConfirmMessage =>
+      'Все ваши решения, прогресс и подписка будут удалены безвозвратно. Это действие нельзя отменить.';
+
+  @override
+  String get settingsDeleteAccountConfirmYes => 'Да, удалить';
+
+  @override
+  String get settingsDeleteAccountConfirmNo => 'Отмена';
+
+  @override
+  String get settingsDeleteAccountError =>
+      'Не удалось удалить аккаунт. Попробуйте выйти и войти заново, затем повторить.';
+
+  @override
+  String get magicBallEnergyHint =>
+      'Энергия восстанавливается на +25 за каждое принятое решение';
 }

@@ -8,17 +8,103 @@ import '../../../core/constants/app_text_styles.dart';
 import '../../../core/localization/generated/app_localizations.dart';
 import '../../../core/router/app_router.dart';
 import '../../../data/models/user_model.dart';
+import '../../../data/repositories/decision_repository_impl.dart';
+import '../../../data/repositories/user_repository_impl.dart';
+import '../../../domain/usecases/auth/delete_account.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/locale_provider.dart';
 import '../../providers/user_profile_provider.dart';
 import '../../widgets/neumorphic/neumorphic_button.dart';
 
+/// Usecase-провайдер для этого экрана — по аналогии с
+/// completeDecisionUseCaseProvider в decision_summary_screen.dart (не в
+/// auth_provider.dart, т.к. зависит ещё и от User-/DecisionRepository, не
+/// только от AuthRepository).
+final Provider<DeleteAccount> deleteAccountUseCaseProvider =
+    Provider<DeleteAccount>((ref) {
+  return DeleteAccount(
+    ref.watch(authRepositoryProvider),
+    ref.watch(userRepositoryProvider),
+    ref.watch(decisionRepositoryProvider),
+  );
+});
+
 /// Экран «Настройки» (маршрут `AppRoutes.settings`, Этап 11) — переключатель
-/// языка интерфейса (см. presentation/providers/locale_provider.dart) и
-/// отображение статуса подписки. Чисто презентационный экран, тот же стиль,
-/// что MindfulnessScreen/AchievementsScreen (Scaffold + AppColors.background +
-/// прозрачный AppBar + SafeArea + SingleChildScrollView).
-class SettingsScreen extends ConsumerWidget {
+/// языка интерфейса (см. presentation/providers/locale_provider.dart),
+/// отображение статуса подписки и удаление аккаунта (требование Google Play
+/// для приложений с регистрацией — см. фидбэк).
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  bool _isDeleting = false;
+
+  Future<void> _confirmAndDeleteAccount(AppLocalizations l10n) async {
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: AppColors.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDimens.cardRadius),
+        ),
+        title: Text(
+          l10n.settingsDeleteAccountConfirmTitle,
+          style: AppTextStyles.titleMedium,
+        ),
+        content: Text(
+          l10n.settingsDeleteAccountConfirmMessage,
+          style: AppTextStyles.bodyLarge,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(
+              l10n.settingsDeleteAccountConfirmNo,
+              style: AppTextStyles.bodySecondary,
+            ),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(
+              l10n.settingsDeleteAccountConfirmYes,
+              style: AppTextStyles.bodyLarge
+                  .copyWith(color: AppColors.waveformChaotic),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true || _isDeleting) return;
+
+    final AuthState authState = ref.read(authNotifierProvider);
+    final String? uid =
+        authState is AuthStateAuthenticated ? authState.uid : null;
+    if (uid == null) return;
+
+    setState(() => _isDeleting = true);
+    try {
+      await ref.read(deleteAccountUseCaseProvider).call(uid);
+      // Успех: FirebaseAuth.currentUser стал null -> authStateChanges()
+      // эмитит null -> AuthNotifier обновляет state -> redirect в
+      // app_router.dart сам уводит на /auth. Ничего навигировать вручную
+      // не нужно.
+    } catch (_) {
+      // Самый вероятный случай — `requires-recent-login` (Firebase требует
+      // свежую сессию для удаления аккаунта), но конкретный код тут не
+      // важен: сообщение одно и то же — попросить войти заново.
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.settingsDeleteAccountError)),
+      );
+    } finally {
+      if (mounted) setState(() => _isDeleting = false);
+    }
+  }
 
   /// Названия языков традиционно показывают на самом языке, а не переводят,
   /// поэтому статическая карта вместо обращения к l10n.
@@ -50,7 +136,7 @@ class SettingsScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final Locale? selectedLocale = ref.watch(localeProvider);
     final UserModel? user = ref.watch(userProfileProvider);
@@ -101,6 +187,15 @@ class SettingsScreen extends ConsumerWidget {
                 )
               else
                 _buildSubscriptionSection(context, l10n, user),
+              const SizedBox(height: 20),
+              Text(l10n.settingsAccountSection, style: AppTextStyles.titleMedium),
+              const SizedBox(height: 12),
+              _DangerButton(
+                label: l10n.settingsDeleteAccountButton,
+                isLoading: _isDeleting,
+                onPressed:
+                    _isDeleting ? null : () => _confirmAndDeleteAccount(l10n),
+              ),
             ],
           ),
         ),
@@ -165,6 +260,59 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Кнопка деструктивного действия — та же неоморфная база, что и
+/// NeumorphicButton, но с акцентным (не общим) цветом текста и опциональным
+/// спиннером вместо подписи. Не расширяем сам NeumorphicButton ради одной
+/// кнопки на весь экран.
+class _DangerButton extends StatelessWidget {
+  const _DangerButton({
+    required this.label,
+    required this.isLoading,
+    required this.onPressed,
+  });
+
+  final String label;
+  final bool isLoading;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppDimens.buttonRadius),
+        border: Border.all(color: AppColors.waveformChaotic.withValues(alpha: 0.5)),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(AppDimens.buttonRadius),
+          onTap: onPressed,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            child: Center(
+              child: isLoading
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: AppColors.waveformChaotic,
+                      ),
+                    )
+                  : Text(
+                      label,
+                      style: AppTextStyles.label
+                          .copyWith(color: AppColors.waveformChaotic),
+                    ),
+            ),
+          ),
+        ),
       ),
     );
   }

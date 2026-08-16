@@ -193,5 +193,13 @@
     }
   },
   "settingsUpgradeButton": "Оформить подписку",
-  "settingsLanguageSystemDefault": "Как в системе"
+  "settingsLanguageSystemDefault": "Как в системе",
+  "settingsAccountSection": "Аккаунт",
+  "settingsDeleteAccountButton": "Удалить аккаунт",
+  "settingsDeleteAccountConfirmTitle": "Удалить аккаунт?",
+  "settingsDeleteAccountConfirmMessage": "Все ваши решения, прогресс и подписка будут удалены безвозвратно. Это действие нельзя отменить.",
+  "settingsDeleteAccountConfirmYes": "Да, удалить",
+  "settingsDeleteAccountConfirmNo": "Отмена",
+  "settingsDeleteAccountError": "Не удалось удалить аккаунт. Попробуйте выйти и войти заново, затем повторить.",
+  "magicBallEnergyHint": "Энергия восстанавливается на +25 за каждое принятое решение"
 }

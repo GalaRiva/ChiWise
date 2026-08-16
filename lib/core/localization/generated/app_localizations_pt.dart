@@ -491,4 +491,31 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get settingsLanguageSystemDefault => 'Padrão do sistema';
+
+  @override
+  String get settingsAccountSection => 'Conta';
+
+  @override
+  String get settingsDeleteAccountButton => 'Excluir conta';
+
+  @override
+  String get settingsDeleteAccountConfirmTitle => 'Excluir conta?';
+
+  @override
+  String get settingsDeleteAccountConfirmMessage =>
+      'Todas as suas decisões, progresso e assinatura serão excluídos permanentemente. Esta ação não pode ser desfeita.';
+
+  @override
+  String get settingsDeleteAccountConfirmYes => 'Sim, excluir';
+
+  @override
+  String get settingsDeleteAccountConfirmNo => 'Cancelar';
+
+  @override
+  String get settingsDeleteAccountError =>
+      'Não foi possível excluir a conta. Tente sair e entrar novamente, depois tente de novo.';
+
+  @override
+  String get magicBallEnergyHint =>
+      'A energia se recupera em +25 a cada decisão que você completa';
 }

@@ -193,5 +193,13 @@
     }
   },
   "settingsUpgradeButton": "Obtener Premium",
-  "settingsLanguageSystemDefault": "Predeterminado del sistema"
+  "settingsLanguageSystemDefault": "Predeterminado del sistema",
+  "settingsAccountSection": "Cuenta",
+  "settingsDeleteAccountButton": "Eliminar cuenta",
+  "settingsDeleteAccountConfirmTitle": "¿Eliminar cuenta?",
+  "settingsDeleteAccountConfirmMessage": "Todas tus decisiones, progreso y suscripción se eliminarán de forma permanente. Esta acción no se puede deshacer.",
+  "settingsDeleteAccountConfirmYes": "Sí, eliminar",
+  "settingsDeleteAccountConfirmNo": "Cancelar",
+  "settingsDeleteAccountError": "No se pudo eliminar la cuenta. Intenta cerrar sesión y volver a entrar, luego inténtalo de nuevo.",
+  "magicBallEnergyHint": "La energía se recarga +25 por cada decisión que completes"
 }

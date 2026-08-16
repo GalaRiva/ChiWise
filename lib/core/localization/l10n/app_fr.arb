@@ -193,5 +193,13 @@
     }
   },
   "settingsUpgradeButton": "Passer à Premium",
-  "settingsLanguageSystemDefault": "Système par défaut"
+  "settingsLanguageSystemDefault": "Système par défaut",
+  "settingsAccountSection": "Compte",
+  "settingsDeleteAccountButton": "Supprimer le compte",
+  "settingsDeleteAccountConfirmTitle": "Supprimer le compte ?",
+  "settingsDeleteAccountConfirmMessage": "Toutes vos décisions, votre progression et votre abonnement seront définitivement supprimés. Cette action est irréversible.",
+  "settingsDeleteAccountConfirmYes": "Oui, supprimer",
+  "settingsDeleteAccountConfirmNo": "Annuler",
+  "settingsDeleteAccountError": "Impossible de supprimer le compte. Essayez de vous déconnecter puis reconnecter, et réessayez.",
+  "magicBallEnergyHint": "L'énergie se recharge de +25 pour chaque décision que vous terminez"
 }
