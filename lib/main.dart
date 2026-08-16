@@ -12,6 +12,7 @@ import 'data/datasources/local/hive_decisions_datasource.dart';
 import 'data/datasources/local/hive_user_datasource.dart';
 import 'data/datasources/local/shared_prefs_datasource.dart';
 import 'services/crashlytics_service.dart';
+import 'services/purchases_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,17 +40,18 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
 
-  // TODO(релиз): инициализация RevenueCat (Этап 6, см.
-  // lib/services/purchases_service.dart и FLUTTER_ARCHITECTURE_PLAN.md §3).
-  // Получить API-ключи (отдельные для iOS/Android) в дэшборде RevenueCat,
-  // передать через --dart-define или конфиг, и раскомментировать:
-  // await PurchasesService().configure(apiKey);
-  // Без этого экран Paywall (см.
-  // lib/presentation/screens/paywall/paywall_screen.dart) показывает только
-  // статичные цены из ТЗ — офферинги из RevenueCat не подгружаются,
-  // PurchasesService.getOfferings() возвращает null (см. PaywallNotifier в
-  // lib/presentation/providers/paywall_provider.dart — это ожидаемое
-  // поведение в этой среде разработки, а не баг).
+  // RevenueCat (Этап 6, см. lib/services/purchases_service.dart) — ключ НЕ
+  // хардкодится в код, передаётся при сборке через
+  // `--dart-define=REVENUECAT_API_KEY=...`. Без него remains пустая строка,
+  // PurchasesService.configure('') просто ничего не делает (Purchases.configure
+  // с пустым ключом бросает исключение, которое сервис сам ловит и
+  // проглатывает, см. класс) — Paywall в этом случае показывает статичные
+  // цены из ТЗ, это ожидаемое поведение, а не баг.
+  const String revenueCatApiKey =
+      String.fromEnvironment('REVENUECAT_API_KEY', defaultValue: '');
+  if (revenueCatApiKey.isNotEmpty) {
+    await const PurchasesService().configure(revenueCatApiKey);
+  }
 
   await Hive.initFlutter();
   // Hive-бокс черновиков/решений (Этап 2, см.

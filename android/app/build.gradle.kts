@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     // START: FlutterFire Configuration
@@ -6,6 +9,18 @@ plugins {
     // END: FlutterFire Configuration
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+}
+
+// Релизная подпись — android/key.properties (в .gitignore, не коммитится,
+// см. android/upload-keystore.jks). Если файла нет (напр. на чужой машине
+// без ключа) — release тихо подписывается debug-ключом, как было раньше,
+// чтобы `flutter build`/`flutter run --release` не ломались у всех подряд;
+// для реального релиза в Play Console key.properties обязателен.
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+val hasKeystoreProperties = keystorePropertiesFile.exists()
+if (hasKeystoreProperties) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
 android {
@@ -29,11 +44,28 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        if (hasKeystoreProperties) {
+            create("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = rootProject.file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = if (hasKeystoreProperties) {
+                signingConfigs.getByName("release")
+            } else {
+                // Нет android/key.properties — подписываем debug-ключом, как в
+                // исходном шаблоне flutter create, чтобы `flutter run --release`
+                // не падал у всех подряд. Для загрузки в Play Console обязателен
+                // настоящий upload-keystore (см. android/upload-keystore.jks).
+                signingConfigs.getByName("debug")
+            }
         }
     }
 }
