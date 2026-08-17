@@ -66,6 +66,14 @@ android {
                 // настоящий upload-keystore (см. android/upload-keystore.jks).
                 signingConfigs.getByName("debug")
             }
+            // AGP 9 включает R8 minify/shrink для release по умолчанию. Без
+            // keep-правил под Firebase/Hive/RevenueCat это ломает их
+            // reflection-based инициализацию (ComponentDiscovery не находит
+            // CrashlyticsRegistrar и т.п.) — приложение зависает на нативном
+            // splash, так и не долетев до первого кадра Flutter. Отключаем
+            // явно, выигрыш в размере APK не стоит этого риска.
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }

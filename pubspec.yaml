@@ -1,7 +1,7 @@
 name: chiwise_magic
 description: "Chi Wise Magic — приложение для принятия решений (Квадрат Декарта) с геймификацией и Магическим Шаром."
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.1.0+2
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
